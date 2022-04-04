@@ -1,24 +1,38 @@
 //THIS IS THE ENTRY FILE - WRITE YOUR MAIN LOGIC HERE!
 
-import { helloWorld, Beispiel } from "./myModule";
-import { alertMe } from "./myOtherModule";
+import { del, enter, letters } from "./inputs";
 
-console.log(helloWorld);
-customElements.define("my-beispiel", Beispiel);
+let cellCount = 0;
+let rowCount = 0;
 
-alertMe();
 
-const myInputValue = document.querySelector<HTMLInputElement>("#myInput");
-
-const myInputValueAlternate = document.querySelector(
-  "#myInput"
-) as HTMLInputElement;
-
-document
-  .querySelector<HTMLInputElement>("#myInput")
-  ?.addEventListener("focus", doSmth);
-
-function doSmth(e: UIEvent) {
-  const val = e.target as HTMLInputElement;
-  console.log(e, val.value);
+updateCellCount();
+updateRowCount();
+console.log(letters);
+function updateRowCount() {
+  enter.onclick = function() {
+    if (cellCount === 4) {
+      rowCount = rowCount > 5 ? rowCount - 1: rowCount;
+      cellCount = 0;
+    }
+    console.log(rowCount);
+  }
 }
+
+function updateCellCount() {
+  del.onclick = function() {
+    cellCount = cellCount > 0 ? cellCount - 1: cellCount;
+    console.log("delete");
+    console.log(cellCount);
+  }
+
+  for (let letter of letters) {
+    letter.onclick = function() {
+      cellCount = cellCount < 4 ? cellCount + 1: cellCount;
+      console.log(letter.id);
+      console.log(cellCount);
+    }
+  }
+}
+
+
