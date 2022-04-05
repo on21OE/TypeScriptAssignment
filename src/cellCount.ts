@@ -1,3 +1,4 @@
+import { fillCellWithLetter } from "./index";
 import { enter, del, letters, cell00 } from "./inputs";
 
 export let colCount = 0;
@@ -28,8 +29,9 @@ export function updateRowCount() {
   
     for (let letter of letters) {
       letter.onclick = function() {
+        fillCellWithLetter(letter.id, cellCount);
         colCount = colCount < 4 ? colCount + 1: colCount;
-        cell00.innerHTML = letter.id;
+        document.getElementById("a") as HTMLButtonElement;
         console.log(letter.id);
         updateCellCount();
       }
