@@ -4,8 +4,9 @@ import { cellCount, colCount, rowCount, updateColCount, updateRowCount } from ".
 import { enter } from "./inputs";
 
 const correctWord = "apfel";
+const correctWordArray = correctWord.split("");
 
-let currentWord: string[] = [];
+let currentWordArray: string[] = [];
 
 updateColCount();
 updateRowCount();
@@ -16,17 +17,25 @@ export function fillCellWithLetter(letter: string, cellCount: string) {
 
 
 export function getCurrentWord() {
-    console.log(document.getElementById("cell0" + colCount)!.innerHTML);
-    if (rowCount === 0 && currentWord.length < 5) {
-       // currentWord.push(document.getElementById("cell0" + (colCount - 1))!.innerHTML);
-        console.log(currentWord);
+    currentWordArray = [];
+    for (let i = 0; i < 5; i++) {
+        currentWordArray.push(document.getElementById("cell" + rowCount.toString() + i)!.innerHTML);
+        console.log(currentWordArray);
     }
-    enter.onclick = function() {
-        if (colCount === 4) {
-          
+}
+
+export function compareWords() {
+    for (let i = 0; i < 5; i++) {
+        if (currentWordArray[i] === correctWordArray[i]) {
+            console.log("Dein Buchstabe " + currentWordArray[i] + " kommt genau an der " + (i + 1) + ". Stelle vor!")
+        } else {
+            for (let j = 0; j < 5; j++) {
+                if (currentWordArray[i] === correctWordArray[j]) {
+                    console.log("Dein Buchstabe " + currentWordArray[i] + " kommt irgendwo im Wort vor!")
+                }
+            }
         }
-        // console.log(cellCount);
-      }
+    }
 }
 
 
