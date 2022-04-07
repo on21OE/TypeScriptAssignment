@@ -26,6 +26,7 @@ export function updateRowCount() {
   export function updateColCount() {
     del.onclick = function() {
       colCount = colCount > 0 ? colCount - 1: colCount;
+      document.getElementById("cell" + rowCount.toString() + colCount)!.innerHTML = "";
       updateCellCount();
       // console.log("delete", cellCount);
     }
