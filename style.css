@@ -32,8 +32,16 @@ td {
     border-color: #8C7489;
 }
 
+td:hover {
+    background-color: #D1D9E4;
+}
+
 tr {
     margin: 0;
+}
+
+.currentRow {
+    background-color: #D1D9E4;
 }
 
 .buttons {

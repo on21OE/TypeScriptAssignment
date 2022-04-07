@@ -1,4 +1,4 @@
-import { fillCellWithLetter, getCurrentWord, compareWords } from "./index";
+import { fillCellWithLetter, getCurrentWord, compareWords, getCell } from "./index";
 import { enter, del, letters, cell00 } from "./inputs";
 
 export let colCount = 0;
@@ -25,6 +25,11 @@ export function updateRowCount() {
   
   export function updateColCount() {
     del.onclick = function() {
+      if (getCell(rowCount, colCount)!.innerHTML === "") {
+        getCell(rowCount, (colCount - 1))!.innerHTML = "";
+      } else {
+        getCell(rowCount, colCount)!.innerHTML = "";
+      }
       colCount = colCount > 0 ? colCount - 1: colCount;
       updateCellCount();
       // console.log("delete", cellCount);
