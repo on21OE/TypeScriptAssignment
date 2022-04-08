@@ -1,4 +1,4 @@
-import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner } from "./index";
+import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner, markCurrentCell } from "./index";
 import { enter, del, letters, cell00 } from "./inputs";
 
 export let colCount = 0;
@@ -12,12 +12,15 @@ function updateCellCount() {
 
 export function updateRowCount() {
     enter.onclick = function() {
+      console.log(colCount);
       if (colCount === 4) {
         getCurrentWord();
         checkForWinner();
         compareWords();
+        getCell(rowCount, 4)!.classList.remove("currentCell");
         rowCount = rowCount < 5 ? rowCount + 1: rowCount;
         colCount = 0;
+        markCurrentCell();
       }
       // console.log(cellCount);
       updateCellCount();
@@ -40,6 +43,7 @@ export function updateRowCount() {
       letter.onclick = function() {
         fillCellWithLetter(letter.id, cellCount);
         colCount = colCount < 4 ? colCount + 1: colCount;
+        markCurrentCell();
         // console.log(letter.id);
         updateCellCount();
       }

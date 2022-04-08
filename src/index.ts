@@ -1,10 +1,7 @@
-//THIS IS THE ENTRY FILE - WRITE YOUR MAIN LOGIC HERE!
-
-import { __spreadArrays } from "../node_modules/tslib/tslib";
 import { cellCount, colCount, rowCount, updateColCount, updateRowCount } from "./cellCount";
 import { enter } from "./inputs";
 
-const wordList: string[] = ["apfel"]
+const wordList: string[] = ["feder"]
 const correctWord = wordList[Math.floor(Math.random() * wordList.length)];
 const correctWordArray = correctWord.split("");
 
@@ -12,6 +9,7 @@ let currentWordArray: string[] = [];
 
 updateColCount();
 updateRowCount();
+markCurrentCell();
 
 export function fillCellWithLetter(letter: string, cellCount: string) {
     document.getElementById("cell" + cellCount)!.innerHTML = letter.toLocaleUpperCase();
@@ -57,6 +55,13 @@ export function getCell(pRowCount: number, pColCount: number) {
 export function checkForWinner() {
     if (currentWordArray.toString() === correctWordArray.toString()) {
         document.getElementById("winningScreen")!.classList.add("show");
+    }
+}
+
+export function markCurrentCell() {
+    getCell(rowCount, colCount)!.classList.add("currentCell")
+    if (colCount !== 0) {
+        getCell(rowCount, (colCount - 1))!.classList.remove("currentCell");
     }
 }
 
