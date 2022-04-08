@@ -3,7 +3,7 @@
 import { cellCount, colCount, rowCount, updateColCount, updateRowCount } from "./cellCount";
 import { enter } from "./inputs";
 
-const wordList: string[] = ["feder"]
+const wordList: string[] = ["apfel"]
 const correctWord = wordList[Math.floor(Math.random() * wordList.length)];
 const correctWordArray = correctWord.split("");
 
