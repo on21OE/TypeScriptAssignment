@@ -1,5 +1,5 @@
 import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner, markCurrentCell } from "./index";
-import { enter, del, letters, cell00 } from "./inputs";
+import { enter, del, letters } from "./inputs";
 
 export let colCount = 0;
 export let rowCount = 0;

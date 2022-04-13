@@ -30,5 +30,3 @@ export const x = document.getElementById("x") as HTMLButtonElement;
 export const y = document.getElementById("y") as HTMLButtonElement;
 export const z = document.getElementById("z") as HTMLButtonElement;
 
-export const cell00 = document.getElementById("cell00") as HTMLTableCellElement;
-
