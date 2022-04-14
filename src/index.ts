@@ -1,5 +1,4 @@
-import { cellCount, colCount, rowCount, updateCellCount, updateColCount, updateRowCount } from "./cellCount";
-import { enter } from "./inputs";
+import { colCount, rowCount } from "./cellCount";
 
 const restartButton = document.getElementById("restart") as HTMLButtonElement;
 
@@ -9,8 +8,6 @@ const correctWordArray = correctWord.split("");
 
 let currentWordArray: string[] = [];
 
-updateColCount();
-updateRowCount();
 markCurrentCell(false);
 
 restartButton.addEventListener("click", restartGame);
@@ -19,14 +16,14 @@ function restartGame() {
     document.location.reload();
 }
 
-export function fillCellWithLetter(letter: string, cellCount: string) {
-    document.getElementById("cell" + cellCount)!.innerHTML = letter;
+export function fillCellWithLetter(letter: string, rowCount: number, colCount: number) {
+    getCell(rowCount, colCount)!.innerHTML = letter;
 };
 
 export function getCurrentWord() {
     currentWordArray = [];
     for (let i = 0; i < 5; i++) {
-        currentWordArray.push(document.getElementById("cell" + rowCount.toString() + i)!.innerHTML.toLocaleLowerCase());
+        currentWordArray.push(getCell(rowCount ,i)!.innerHTML);
     }
 }
 
@@ -69,7 +66,6 @@ export function checkForWinner() {
 }
 
 export function markCurrentCell(isLetterDeleted: boolean) {
-    console.log(rowCount, colCount);
     getCell(rowCount, colCount)!.classList.add("currentCell")
     if (colCount !== 0) {
         getCell(rowCount, (colCount - 1))!.classList.remove("currentCell");
