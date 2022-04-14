@@ -5,7 +5,7 @@ export let colCount = 0;
 export let rowCount = 0;
 export let cellCount = colCount.toString() + rowCount.toString();
 
-function updateCellCount() {
+export function updateCellCount() {
     cellCount = rowCount.toString() + colCount.toString();
     // console.log(cellCount);
 }
@@ -20,7 +20,7 @@ export function updateRowCount() {
         getCell(rowCount, 4)!.classList.remove("currentCell");
         rowCount = rowCount < 5 ? rowCount + 1: rowCount;
         colCount = 0;
-        markCurrentCell();
+        markCurrentCell(false);
       }
       // console.log(cellCount);
       updateCellCount();
@@ -29,12 +29,13 @@ export function updateRowCount() {
   
   export function updateColCount() {
     del.onclick = function() {
-      if (getCell(rowCount, colCount)!.innerHTML === "") {
+      if (getCell(rowCount, colCount)!.innerHTML === "" && colCount !== 0) {
         getCell(rowCount, (colCount - 1))!.innerHTML = "";
       } else {
         getCell(rowCount, colCount)!.innerHTML = "";
       }
       colCount = colCount > 0 ? colCount - 1: colCount;
+      markCurrentCell(true);
       updateCellCount();
       // console.log("delete", cellCount);
     }
@@ -43,7 +44,8 @@ export function updateRowCount() {
       letter.onclick = function() {
         fillCellWithLetter(letter.id, cellCount);
         colCount = colCount < 4 ? colCount + 1: colCount;
-        markCurrentCell();
+        console.log(colCount);
+        markCurrentCell(false);
         // console.log(letter.id);
         updateCellCount();
       }

@@ -1,7 +1,9 @@
-import { cellCount, colCount, rowCount, updateColCount, updateRowCount } from "./cellCount";
+import { cellCount, colCount, rowCount, updateCellCount, updateColCount, updateRowCount } from "./cellCount";
 import { enter } from "./inputs";
 
-const wordList: string[] = ["feder"]
+const restartButton = document.getElementById("restart") as HTMLButtonElement;
+
+const wordList: string[] = ["feder" /* ,"mauer", "torte", "wurst", "pappe", "haare" */]
 const correctWord = wordList[Math.floor(Math.random() * wordList.length)];
 const correctWordArray = correctWord.split("");
 
@@ -9,41 +11,36 @@ let currentWordArray: string[] = [];
 
 updateColCount();
 updateRowCount();
-markCurrentCell();
+markCurrentCell(false);
+
+restartButton.addEventListener("click", restartGame);
+
+function restartGame() {
+    document.location.reload();
+}
 
 export function fillCellWithLetter(letter: string, cellCount: string) {
     document.getElementById("cell" + cellCount)!.innerHTML = letter;
 };
 
-// function markCurrentRow() {
-//     for (let i = 0; i < 5; i++) {
-//         document.getElementById("cell" + rowCount.toString() + i)!.classList.add("currentRow");
-//     }
-// }
-
 export function getCurrentWord() {
     currentWordArray = [];
     for (let i = 0; i < 5; i++) {
         currentWordArray.push(document.getElementById("cell" + rowCount.toString() + i)!.innerHTML.toLocaleLowerCase());
-        console.log(currentWordArray);
     }
 }
 
 export function compareWords() {
-    if (currentWordArray === correctWordArray) {
-        checkForWinner();
-    }
+    checkForWinner();
 
     let lettersToCheck: string[] = [];
     let greenAndYellowLetters: string[] = [];
     for (let i = 0; i < 5; i++) {
-        let guessedLetterCount: number = 0;
         if (currentWordArray[i] === correctWordArray[i]) {
             document.getElementById("cell" + rowCount.toString() + i)!.style.backgroundColor = "rgba(75, 87, 62, 0.8)";
             document.getElementById("cell" + rowCount.toString() + i)!.style.color = "#FFFFFF";
             lettersToCheck.push("0");
             greenAndYellowLetters.push(currentWordArray[i])
-            guessedLetterCount++;
         } else if (correctWordArray.some(x => x === currentWordArray[i])){
             lettersToCheck.push(currentWordArray[i])
         } else {
@@ -71,10 +68,14 @@ export function checkForWinner() {
     }
 }
 
-export function markCurrentCell() {
+export function markCurrentCell(isLetterDeleted: boolean) {
+    console.log(rowCount, colCount);
     getCell(rowCount, colCount)!.classList.add("currentCell")
     if (colCount !== 0) {
         getCell(rowCount, (colCount - 1))!.classList.remove("currentCell");
+    }
+    if (isLetterDeleted) {
+        getCell(rowCount, (colCount + 1))!.classList.remove("currentCell");
     }
 }
 
