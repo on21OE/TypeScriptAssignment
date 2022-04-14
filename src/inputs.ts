@@ -29,4 +29,3 @@ export const w = document.getElementById("w") as HTMLButtonElement;
 export const x = document.getElementById("x") as HTMLButtonElement;
 export const y = document.getElementById("y") as HTMLButtonElement;
 export const z = document.getElementById("z") as HTMLButtonElement;
-

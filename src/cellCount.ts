@@ -13,7 +13,7 @@ function checkIfRowIsFilled() {
   return true;
 }
 
-enter.onclick = function() {
+function handleEnter() {
   if (checkIfRowIsFilled()) {
     getCurrentWord();
     checkForWinner();
@@ -25,7 +25,7 @@ enter.onclick = function() {
   }
 }
 
-del.onclick = function() {
+function handleDelete() {
   if (getCell(rowCount, colCount)!.innerHTML === "" && colCount !== 0) {
     getCell(rowCount, (colCount - 1))!.innerHTML = "";
   } else {
@@ -35,11 +35,36 @@ del.onclick = function() {
   markCurrentCell(true);
 }
 
+function handleLetterInput(letter: string) {
+  fillCellWithLetter(letter, rowCount, colCount);
+  colCount = colCount < 4 ? colCount + 1: colCount;
+  markCurrentCell(false);
+}
+
+enter.onclick = function() {
+  handleEnter();
+}
+
+del.onclick = function() {
+  handleDelete();
+}
+
 for (let letter of letters) {
   letter.onclick = function() {
-    fillCellWithLetter(letter.id, rowCount, colCount);
-    colCount = colCount < 4 ? colCount + 1: colCount;
-    console.log(colCount);
-    markCurrentCell(false);
+    handleLetterInput(letter.innerHTML);
   }
+  
 }
+document.addEventListener('keydown', (event) => {
+  const validKeys = "abcdefghijklmnopqrstuvwxyz"
+  const keyName = event.key;
+  if (keyName === "Enter") {
+    handleEnter();
+  }
+  if (keyName === "Backspace") {
+    handleDelete();
+  }
+  if (validKeys.includes(keyName)) {
+    handleLetterInput(keyName)
+  }
+});
