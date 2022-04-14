@@ -2,7 +2,7 @@ import { colCount, rowCount } from "./cellCount";
 
 const restartButton = document.getElementById("restart") as HTMLButtonElement;
 
-const wordList: string[] = ["feder" /* ,"mauer", "torte", "wurst", "pappe", "haare" */]
+const wordList: string[] = ["rasan" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
 const correctWord = wordList[Math.floor(Math.random() * wordList.length)];
 const correctWordArray = correctWord.split("");
 
@@ -33,13 +33,18 @@ export function compareWords() {
     for (let i = 0; i < 5; i++) {
         if (currentWordArray[i] === correctWordArray[i]) {
             document.getElementById("cell" + rowCount.toString() + i)!.style.backgroundColor = "rgba(75, 87, 62, 0.8)";
-            document.getElementById("cell" + rowCount.toString() + i)!.style.color = "#FFFFFF";
+            document.getElementById("cell" + rowCount.toString() + i)!.style.color = "rgb(255, 255, 255)";
+            document.getElementById(currentWordArray[i])!.classList.add("correctLetters");
+            if (document.getElementById(currentWordArray[i])!.classList.contains("existingLetters")) {
+                document.getElementById(currentWordArray[i])!.classList.remove("existingLetters");
+            }
             lettersToCheck.push("0");
             greenAndYellowLetters.push(currentWordArray[i])
         } else if (correctWordArray.some(x => x === currentWordArray[i])){
             lettersToCheck.push(currentWordArray[i])
         } else {
             lettersToCheck.push("0");
+            document.getElementById(currentWordArray[i])!.classList.add("wrongLetters");
         }
     }
 
@@ -47,7 +52,10 @@ export function compareWords() {
         if (greenAndYellowLetters.filter(x => x === lettersToCheck[i]).length 
         < correctWordArray.filter(x => x === lettersToCheck[i]).length) {
             document.getElementById("cell" + rowCount.toString() + i)!.style.backgroundColor = "rgba(197, 166, 46, 0.7)";
-            document.getElementById("cell" + rowCount.toString() + i)!.style.color = "#FFFFFF";
+            document.getElementById("cell" + rowCount.toString() + i)!.style.color = "rgb(255, 255, 255)";
+            if (!document.getElementById(currentWordArray[i])!.classList.contains("correctLetters")) {
+                document.getElementById(currentWordArray[i])!.classList.add("existingLetters");
+            }
             greenAndYellowLetters.push(lettersToCheck[i]);
         }
     }
@@ -72,10 +80,3 @@ export function markCurrentCell(isLetterDeleted: boolean) {
         getCell(rowCount, (colCount + 1))!.classList.remove("currentCell");
     }
 }
-
-
-
-
-
-
-

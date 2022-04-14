@@ -100,6 +100,31 @@ tr {
     background-color: #795464;
 }
 
+.correctLetters {
+    background-color: rgba(75, 87, 62, 0.8);
+}
+
+.correctLetters:hover {
+    background-color: rgba(75, 87, 62, 1);
+}
+
+.existingLetters {
+    background-color: rgba(197, 166, 46, 0.7);
+}
+
+.existingLetters:hover {
+    background-color: rgba(197, 166, 46, );
+}
+
+.wrongLetters {
+    background-color: white;
+    color: #795464;
+}
+
+.wrongLetters:hover {
+    background-color: #8c748962;
+}
+
 .winningScreen {
     display: none;
     position: fixed;
@@ -116,18 +141,19 @@ tr {
 }
 
 #restart {
-    font-size: 2rem;
-    background-color: white;
-    border : 1px solid #8C7489;
+    font-size: 1.5rem;
+    width: 200px;
+    height: 50px;
+    background-color: #8C7489;
+    border : none;
     cursor: pointer;
     margin-top: 12px;
     border-radius: 8px;
-    color: #795464;
+    color: white;
 }
 
 #restart:hover {
-    background-color: #BDB3BF;
-    border : 1px solid;
+    background-color: #795464;
 }
 
 .winningScreen.show {
