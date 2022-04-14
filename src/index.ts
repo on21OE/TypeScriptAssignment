@@ -28,8 +28,6 @@ export function getCurrentWord() {
 }
 
 export function compareWords() {
-    checkForWinner();
-
     let lettersToCheck: string[] = [];
     let greenAndYellowLetters: string[] = [];
     for (let i = 0; i < 5; i++) {

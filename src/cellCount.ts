@@ -4,9 +4,17 @@ import { enter, del, letters } from "./inputs";
 export let colCount = 0;
 export let rowCount = 0;
 
+function checkIfRowIsFilled() {
+  for (let i = 0; i < 5; i++) {
+    if (getCell(rowCount, i)!.innerHTML === "") {
+      return false;
+    }
+  }
+  return true;
+}
+
 enter.onclick = function() {
-  console.log(colCount);
-  if (colCount === 4) {
+  if (checkIfRowIsFilled()) {
     getCurrentWord();
     checkForWinner();
     compareWords();
@@ -16,7 +24,6 @@ enter.onclick = function() {
     markCurrentCell(false);
   }
 }
-
 
 del.onclick = function() {
   if (getCell(rowCount, colCount)!.innerHTML === "" && colCount !== 0) {
@@ -36,4 +43,3 @@ for (let letter of letters) {
     markCurrentCell(false);
   }
 }
-
