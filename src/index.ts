@@ -70,6 +70,26 @@ export function getCell(pRowCount: number, pColCount: number) {
 export function checkForWinner() {
     if (currentWordArray.toString() === correctWordArray.toString()) {
         document.getElementById("winningScreen")!.classList.add("show");
+        switch (rowCount) {
+            case 0:
+                document.getElementById("stats")!.innerHTML = "Du hast einen Versuch (" + (rowCount + 1) + ") gebraucht!";
+                break;
+            case 1:
+                document.getElementById("stats")!.innerHTML = "Du hast zwei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                break;
+            case 2:
+                document.getElementById("stats")!.innerHTML = "Du hast drei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                break;
+            case 3:
+                document.getElementById("stats")!.innerHTML = "Du hast zwei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                break;
+            case 4:
+                document.getElementById("stats")!.innerHTML = "Du hast zwei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                break;
+            case 5:
+                document.getElementById("stats")!.innerHTML = "Du hast zwei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                break; 
+        }
         return true;
     }
     return false;
