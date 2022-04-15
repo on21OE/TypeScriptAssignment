@@ -36,8 +36,7 @@ export function compareWords() {
     let greenAndYellowLetters: string[] = [];
     for (let i = 0; i < 5; i++) {
         if (currentWordArray[i] === correctWordArray[i]) {
-            document.getElementById("cell" + rowCount.toString() + i)!.style.backgroundColor = "rgba(75, 87, 62, 0.8)";
-            document.getElementById("cell" + rowCount.toString() + i)!.style.color = "rgb(255, 255, 255)";
+            document.getElementById("cell" + rowCount.toString() + i)!.classList.add("correctLetters");
             document.getElementById(currentWordArray[i])!.classList.add("correctLetters");
             if (document.getElementById(currentWordArray[i])!.classList.contains("existingLetters")) {
                 document.getElementById(currentWordArray[i])!.classList.remove("existingLetters");
@@ -55,8 +54,7 @@ export function compareWords() {
     for (let i = 0; i < 5; i++) {
         if (greenAndYellowLetters.filter(x => x === lettersToCheck[i]).length 
         < correctWordArray.filter(x => x === lettersToCheck[i]).length) {
-            document.getElementById("cell" + rowCount.toString() + i)!.style.backgroundColor = "rgba(197, 166, 46, 0.7)";
-            document.getElementById("cell" + rowCount.toString() + i)!.style.color = "rgb(255, 255, 255)";
+            document.getElementById("cell" + rowCount.toString() + i)!.classList.add("existingLetters");
             if (!document.getElementById(currentWordArray[i])!.classList.contains("correctLetters")) {
                 document.getElementById(currentWordArray[i])!.classList.add("existingLetters");
             }
