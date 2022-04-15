@@ -5,9 +5,11 @@ const restartButtons = document.getElementsByClassName("restart") as HTMLCollect
 const wordList: string[] = ["rasan" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
 const correctWord = wordList[Math.floor(Math.random() * wordList.length)];
 const correctWordArray = correctWord.split("");
+let correctWordLength = 5;
 
 let currentWordArray: string[] = [];
 
+generateCells();
 markCurrentCell(false);
 
 for (const restartButton of restartButtons) {
@@ -111,4 +113,14 @@ export function markCurrentCell(isLetterDeleted: boolean) {
     if (isLetterDeleted) {
         getCell(rowCount, (colCount + 1))!.classList.remove("currentCell");
     }
+}
+
+function generateCells() {
+    for (let i = 0; i < 6; i++) {
+        for (let  j = 0; j < correctWordLength; j++) {
+            let newCell = document.createElement("td");
+            newCell.setAttribute("id", "cell" + i + j);
+            document.getElementById("row" + i)?.appendChild(newCell);
+        }
+    }   
 }
