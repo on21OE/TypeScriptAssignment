@@ -1,6 +1,6 @@
 import { colCount, rowCount } from "./cellCount";
 
-const restartButton = document.getElementById("restart") as HTMLButtonElement;
+const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
 
 const wordList: string[] = ["rasan" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
 const correctWord = wordList[Math.floor(Math.random() * wordList.length)];
@@ -10,7 +10,9 @@ let currentWordArray: string[] = [];
 
 markCurrentCell(false);
 
-restartButton.addEventListener("click", restartGame);
+for (const restartButton of restartButtons) {
+    restartButton.addEventListener("click", restartGame);
+}
 
 function restartGame() {
     document.location.reload();
@@ -18,7 +20,7 @@ function restartGame() {
 
 export function fillCellWithLetter(letter: string, rowCount: number, colCount: number) {
     getCell(rowCount, colCount)!.innerHTML = letter;
-};
+}
 
 export function getCurrentWord() {
     currentWordArray = [];
@@ -68,7 +70,17 @@ export function getCell(pRowCount: number, pColCount: number) {
 export function checkForWinner() {
     if (currentWordArray.toString() === correctWordArray.toString()) {
         document.getElementById("winningScreen")!.classList.add("show");
+        return true;
     }
+    return false;
+}
+
+export function checkForLoser() {
+    if (rowCount === 5) {
+        document.getElementById("losingScreen")!.classList.add("show");
+        return true;
+    }
+    return false;
 }
 
 export function markCurrentCell(isLetterDeleted: boolean) {

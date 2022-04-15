@@ -1,4 +1,4 @@
-import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner, markCurrentCell } from "./index";
+import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner, markCurrentCell, checkForLoser } from "./index";
 import { enter, del, letters } from "./inputs";
 
 export let colCount = 0;
@@ -16,8 +16,13 @@ function checkIfRowIsFilled() {
 function handleEnter() {
   if (checkIfRowIsFilled()) {
     getCurrentWord();
-    checkForWinner();
     compareWords();
+    if (checkForWinner()) {
+      return;
+    }
+    if (checkForLoser()) {
+      return;
+    }
     getCell(rowCount, 4)!.classList.remove("currentCell");
     rowCount = rowCount < 5 ? rowCount + 1: rowCount;
     colCount = 0;
@@ -53,8 +58,8 @@ for (let letter of letters) {
   letter.onclick = function() {
     handleLetterInput(letter.innerHTML);
   }
-  
 }
+
 document.addEventListener('keydown', (event) => {
   const validKeys = "abcdefghijklmnopqrstuvwxyz"
   const keyName = event.key;
