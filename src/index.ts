@@ -81,13 +81,13 @@ export function checkForWinner() {
                 document.getElementById("stats")!.innerHTML = "Du hast drei Versuche (" + (rowCount + 1) + ") gebraucht!";
                 break;
             case 3:
-                document.getElementById("stats")!.innerHTML = "Du hast zwei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("stats")!.innerHTML = "Du hast vier Versuche (" + (rowCount + 1) + ") gebraucht!";
                 break;
             case 4:
-                document.getElementById("stats")!.innerHTML = "Du hast zwei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("stats")!.innerHTML = "Du hast fünf Versuche (" + (rowCount + 1) + ") gebraucht!";
                 break;
             case 5:
-                document.getElementById("stats")!.innerHTML = "Du hast zwei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("stats")!.innerHTML = "Du hast sechs Versuche (" + (rowCount + 1) + ") gebraucht!";
                 break; 
         }
         return true;
@@ -98,6 +98,7 @@ export function checkForWinner() {
 export function checkForLoser() {
     if (rowCount === 5) {
         document.getElementById("losingScreen")!.classList.add("show");
+        getCell(rowCount, colCount)?.classList.remove("currentCell");
         return true;
     }
     return false;
