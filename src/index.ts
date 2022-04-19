@@ -13,7 +13,7 @@ const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
 const winRestartButton = document.getElementById("winRestart") as HTMLButtonElement;
 
 const easyWordList: string[] =["baum", /* "bein", "maus", "fein", "frau", "senf", "igel", "hund" */]
-const normalWordList: string[] = ["kreuz", /* "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze" */]
+const normalWordList: string[] = ["kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze"]
 const hardWordList: string[] = ["banane", /* "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz" */]
 
 export let correctWordLength = 5;
@@ -25,6 +25,16 @@ let currentWordArray: string[] = [];
 let winStreak = 1;
 
 winRestartButton.addEventListener("click", () => winStreak++);
+
+easyModeButton.addEventListener("click", () => changeDifficulty(4));
+normalModeButton.addEventListener("click", () => changeDifficulty(5));
+hardModeButton.addEventListener("click", () => changeDifficulty(6));
+
+instructionsOpenButton.addEventListener("click", () => toggleNavBarElements(true));
+instructionsCloseButton.addEventListener("click", () => toggleNavBarElements(true));
+settingsOpenButton.addEventListener("click", () => toggleNavBarElements(false));
+settingsCloseButton.addEventListener("click", () => toggleNavBarElements(false));
+
 startGame();
 function startGame() {
     currentWordArray = [];
@@ -50,22 +60,8 @@ function restartGame() {
     document.getElementById("losingScreen")!.classList.remove("show");
 ;}
 
-easyModeButton.addEventListener("click", changeToEasy);
-normalModeButton.addEventListener("click", changeToNormal);
-hardModeButton.addEventListener("click", changeToHard);
-
-function changeToEasy() {
-    correctWordLength = 4;
-    restartGame();
-}
-
-function changeToNormal() {
-    correctWordLength = 5;
-    restartGame();
-}
-
-function changeToHard() {
-    correctWordLength = 6;
+function changeDifficulty(difficulty: number) {
+    correctWordLength = difficulty;
     restartGame();
 }
 
@@ -73,49 +69,38 @@ function getCorrectWord() {
     switch (correctWordLength) {
         case 4:
             correctWord = easyWordList[Math.floor(Math.random() * easyWordList.length)];
-            correctWordLength = 4;
             break;
         case 5:
             correctWord = normalWordList[Math.floor(Math.random() * normalWordList.length)];
-            correctWordLength = 5;
             break;
         case 6:
             correctWord = hardWordList[Math.floor(Math.random() * hardWordList.length)];
-            correctWordLength = 6;
             break;
     }
     correctWordArray = correctWord.split("");
 }
 
-instructionsOpenButton.addEventListener("click", toggleInstructions);
-instructionsCloseButton.addEventListener("click", toggleInstructions);
-
-function toggleInstructions() {
-    if (document.getElementById("settings")!.style.display === "block") {
-        document.getElementById("settings")!.style.display = "none";
-    } 
-    if (document.getElementById("instructions")!.style.display === "block") {
-        document.getElementById("instructions")!.style.display = "none";
+function toggleNavBarElements(isInstructions: boolean) {
+    if(isInstructions) {
+        if (document.getElementById("settings")!.style.display === "block") {
+            document.getElementById("settings")!.style.display = "none";
+        } 
+        if (document.getElementById("instructions")!.style.display === "block") {
+            document.getElementById("instructions")!.style.display = "none";
+        } else {
+            document.getElementById("instructions")!.style.display = "block";
+        }
     } else {
-        document.getElementById("instructions")!.style.display = "block";
+        if (document.getElementById("instructions")!.style.display === "block") {
+            document.getElementById("instructions")!.style.display = "none";
+        }
+        if (document.getElementById("settings")!.style.display === "block") {
+            document.getElementById("settings")!.style.display = "none";
+        } else {
+            document.getElementById("settings")!.style.display = "block";
+        }
     }
 }
-
-settingsOpenButton.addEventListener("click", toggleSettings);
-settingsCloseButton.addEventListener("click", toggleSettings);
-
-function toggleSettings() {
-    if (document.getElementById("instructions")!.style.display === "block") {
-        document.getElementById("instructions")!.style.display = "none";
-    }
-    if (document.getElementById("settings")!.style.display === "block") {
-        document.getElementById("settings")!.style.display = "none";
-    } else {
-        document.getElementById("settings")!.style.display = "block";
-    }
-}
-
-
 
 for (const restartButton of restartButtons) {
     restartButton.addEventListener("click", restartGame);
@@ -202,6 +187,7 @@ export function checkForLoser() {
         document.getElementById("losingScreen")!.classList.add("show");
         getCell(rowCount, colCount)?.classList.remove("currentCell");
         document.getElementById("lostWinStreak")!.innerHTML = "Deine verlorene Win-Streak: " + (winStreak - 1);
+        winStreak = 1;
         return true;
     }
     return false;
@@ -230,7 +216,6 @@ function generateCells() {
 
 function clearCells() {
     const cells = document.getElementsByClassName("cell") as HTMLCollectionOf<HTMLTableCellElement>;
-    console.log(cells)
     const cellsLength = cells.length;
     for (let i = 0; i < cellsLength; i++) {
          cells[0].remove();

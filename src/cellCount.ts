@@ -68,11 +68,12 @@ for (let letter of letters) {
 }
 
 document.addEventListener('keydown', (event) => {
-  const validKeys = "abcdefghijklmnopqrstuvwxyz"
+  const validKeys = "ABCDEFGAHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
   const keyName = event.key;
   if (document.getElementById("winningScreen")!.classList.contains("show") 
   || document.getElementById("losingScreen")!.classList.contains("show") 
-  || document.getElementById("instructions")!.style.display === "block") {
+  || document.getElementById("instructions")!.style.display === "block"
+  || document.getElementById("settings")!.style.display === "block") {
     return;
   }
   if (keyName === "Enter") {
@@ -82,6 +83,6 @@ document.addEventListener('keydown', (event) => {
     handleDelete();
   }
   if (validKeys.includes(keyName)) {
-    handleLetterInput(keyName)
+    handleLetterInput(keyName.toLowerCase())
   }
 });
