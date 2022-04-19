@@ -123,6 +123,7 @@ h1 {
     max-width: 80%;
     color: white;
     height: 30vh;
+    display: none;
 }
 
 .difficulty {

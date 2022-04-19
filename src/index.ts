@@ -3,6 +3,11 @@ import { colCount, rowCount } from "./cellCount";
 const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
 const instructionsOpenButton = document.getElementById("instructions-button") as HTMLButtonElement;
 const instructionsCloseButton = document.getElementById("instructions-close") as HTMLButtonElement;
+const settingsOpenButton = document.getElementById("settings-button") as HTMLButtonElement;
+const settingsCloseButton = document.getElementById("settings-close") as HTMLButtonElement;
+const easyModeButton = document.getElementById("easy") as HTMLButtonElement;
+const normalModeButton = document.getElementById("normal") as HTMLButtonElement;
+const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
 
 const easyWordList: string[] =["baum"]
 const normalWordList: string[] = ["feder" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
@@ -33,10 +38,13 @@ function getCorrectWord() {
     correctWordArray = correctWord.split("");
 }
 
-instructionsOpenButton.addEventListener("click", openInstructions);
-instructionsCloseButton.addEventListener("click", closeInstructions);
+instructionsOpenButton.addEventListener("click", toggleInstructions);
+instructionsCloseButton.addEventListener("click", toggleInstructions);
 
-function openInstructions() {
+function toggleInstructions() {
+    if (document.getElementById("settings")!.style.display === "block") {
+        document.getElementById("settings")!.style.display = "none";
+    } 
     if (document.getElementById("instructions")!.style.display === "block") {
         document.getElementById("instructions")!.style.display = "none";
     } else {
@@ -44,9 +52,21 @@ function openInstructions() {
     }
 }
 
-function closeInstructions() {
-    document.getElementById("instructions")!.style.display = "none";
+settingsOpenButton.addEventListener("click", toggleSettings);
+settingsCloseButton.addEventListener("click", toggleSettings);
+
+function toggleSettings() {
+    if (document.getElementById("instructions")!.style.display === "block") {
+        document.getElementById("instructions")!.style.display = "none";
+    }
+    if (document.getElementById("settings")!.style.display === "block") {
+        document.getElementById("settings")!.style.display = "none";
+    } else {
+        document.getElementById("settings")!.style.display = "block";
+    }
 }
+
+
 
 for (const restartButton of restartButtons) {
     restartButton.addEventListener("click", restartGame);
