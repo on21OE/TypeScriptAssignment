@@ -1,11 +1,11 @@
-import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner, markCurrentCell, checkForLoser } from "./index";
+import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner, markCurrentCell, checkForLoser, correctWordLength } from "./index";
 import { enter, del, letters } from "./inputs";
 
 export let colCount = 0;
 export let rowCount = 0;
 
 function checkIfRowIsFilled() {
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < correctWordLength; i++) {
     if (getCell(rowCount, i)!.innerHTML === "") {
       return false;
     }
@@ -23,7 +23,7 @@ function handleEnter() {
     if (checkForLoser()) {
       return;
     }
-    getCell(rowCount, 4)!.classList.remove("currentCell");
+    getCell(rowCount, (correctWordLength - 1))!.classList.remove("currentCell");
     rowCount = rowCount < 5 ? rowCount + 1: rowCount;
     colCount = 0;
     markCurrentCell(false);
@@ -44,7 +44,7 @@ function handleDelete() {
 
 function handleLetterInput(letter: string) {
   fillCellWithLetter(letter, rowCount, colCount);
-  colCount = colCount < 4 ? colCount + 1: colCount;
+  colCount = colCount < (correctWordLength - 1) ? colCount + 1: colCount;
   markCurrentCell(false);
 }
 

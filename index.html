@@ -8,13 +8,17 @@
     <script defer src="./build/bundle.js"></script>
     <link rel="stylesheet" href="style.css" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap');
     </style>
 </head>
 
 <body>
     <div class="header">
         <h1>Wörtchen</h1>
+        <div>
+            <span>Anleitung</span>
+            <span>Einstellungen</span>
+        </div>
     </div>
     
     <div class="winningScreen" id="winningScreen">   
@@ -26,6 +30,65 @@
     <div class="losingScreen" id="losingScreen">   
         <div>Du hast verloren!</div>
         <button class="restart">Neues Wort</button>
+    </div>
+
+    <div class="instructions">
+        <div class="instructions-header">
+            <h2>Anleitung</h2>
+            <button class="close">X</button>
+        </div>
+        <div class="instructions-text">
+            <h3>Ziel des Spiels:</h3>
+            <p>Das Ziel des Spiels ist es ein Wort zu erraten.</p>
+            <h3>Ablauf des Spiels:</h3>
+            <p>Um das Wort zu erraten hat man sechs Versuche. Dafür gibt man einen Begriff in der vorgegebenen Länge ein.</p>
+            <p>Dies ist entweder mit den Buttons auf dem Bildschirm oder der Tastatur möglich.</p>
+            <p>Um ein Wort zu bestätigen muss man Enter drücken.</p>
+            <h3>Hinweise: </h3>
+            <p>Nach jedem eingegebenen Wort erhält man Hinweise, die helfen können den gesuchten Begriff zu erraten.</p>
+            <p>Diese werden durch folgende farbliche Markierungen gekennzeichnet:</p>
+            <table>
+                <tr>
+                    <td class="correctLetters">k</td>
+                    <td>l</td>
+                    <td>e</td>
+                    <td>i</td>
+                    <td>d</td>
+                </tr>
+            </table>
+            <p>Das "K" befindet sich in dem Wort und ist genau an dieser Stelle.</p>
+            <table>
+                <tr>
+                    <td>a</td>
+                    <td>p</td>
+                    <td>f</td>
+                    <td class="existingLetters">e</td>
+                    <td>l</td>
+                </tr>
+            </table>
+            <p>Das "E" befindet sich in dem Wort, aber ist an einer anderen Stelle.</p>
+            <table>
+                <tr>
+                    <td>m</td>
+                    <td>o</td>
+                    <td>t</td>
+                    <td>o</td>
+                    <td>r</td>
+                </tr>
+            </table>
+            <p>Keiner der Buchstaben befindet sich in dem Wort.</p>
+            <h3>Schwierigkeitsgrade:</h3>
+            <p>Der ausgewählte Schwierigkeitsgrad entscheidet über die Wortlänge des Lösungswortes.</p>
+            <p>Einfach: 4</p>
+            <p>Normal: 5</p>
+            <p>Schwierig: 6</p>
+            <p>Standardmäßig wird im normalen Modus gespielt.</p>
+        </div>
+    </div>
+
+    <div class="settings">
+        <div>Das sind Settings</div>
+
     </div>
 
     <table>

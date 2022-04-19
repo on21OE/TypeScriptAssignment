@@ -2,15 +2,34 @@ import { colCount, rowCount } from "./cellCount";
 
 const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
 
-const wordList: string[] = ["feder" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
-const correctWord = wordList[Math.floor(Math.random() * wordList.length)];
-const correctWordArray = correctWord.split("");
-let correctWordLength = 6;
+const easyWordList: string[] =["baum"]
+const normalWordList: string[] = ["feder" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
+const hardWordList: string[] = ["banane"]
+
+export let correctWordLength = 4;
+let correctWord: string;
+let correctWordArray: string[];
 
 let currentWordArray: string[] = [];
 
 generateCells();
 markCurrentCell(false);
+getCorrectWord();
+
+function getCorrectWord() {
+    switch (correctWordLength) {
+        case 4:
+            correctWord = easyWordList[Math.floor(Math.random() * easyWordList.length)];
+            break;
+        case 5:
+            correctWord = normalWordList[Math.floor(Math.random() * normalWordList.length)];
+            break;
+        case 6:
+            correctWord = hardWordList[Math.floor(Math.random() * hardWordList.length)];
+            break;
+    }
+    correctWordArray = correctWord.split("");
+}
 
 for (const restartButton of restartButtons) {
     restartButton.addEventListener("click", restartGame);
@@ -26,7 +45,7 @@ export function fillCellWithLetter(letter: string, rowCount: number, colCount: n
 
 export function getCurrentWord() {
     currentWordArray = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < correctWordLength; i++) {
         currentWordArray.push(getCell(rowCount ,i)!.innerHTML);
     }
 }
@@ -34,7 +53,7 @@ export function getCurrentWord() {
 export function compareWords() {
     let lettersToCheck: string[] = [];
     let greenAndYellowLetters: string[] = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < correctWordLength; i++) {
         if (currentWordArray[i] === correctWordArray[i]) {
             document.getElementById("cell" + rowCount.toString() + i)!.classList.add("correctLetters");
             document.getElementById(currentWordArray[i])!.classList.add("correctLetters");
@@ -51,7 +70,7 @@ export function compareWords() {
         }
     }
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < correctWordLength; i++) {
         if (greenAndYellowLetters.filter(x => x === lettersToCheck[i]).length 
         < correctWordArray.filter(x => x === lettersToCheck[i]).length) {
             document.getElementById("cell" + rowCount.toString() + i)!.classList.add("existingLetters");
