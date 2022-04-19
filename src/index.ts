@@ -1,12 +1,14 @@
 import { colCount, rowCount } from "./cellCount";
 
 const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
+const instructionsOpenButton = document.getElementById("instructions-button") as HTMLButtonElement;
+const instructionsCloseButton = document.getElementById("instructions-close") as HTMLButtonElement;
 
 const easyWordList: string[] =["baum"]
 const normalWordList: string[] = ["feder" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
 const hardWordList: string[] = ["banane"]
 
-export let correctWordLength = 4;
+export let correctWordLength = 5;
 let correctWord: string;
 let correctWordArray: string[];
 
@@ -29,6 +31,17 @@ function getCorrectWord() {
             break;
     }
     correctWordArray = correctWord.split("");
+}
+
+instructionsOpenButton.addEventListener("click", openInstructions);
+instructionsCloseButton.addEventListener("click", closeInstructions);
+
+function openInstructions() {
+    document.getElementById("instructions")!.style.display = "block";
+}
+
+function closeInstructions() {
+    document.getElementById("instructions")!.style.display = "none";
 }
 
 for (const restartButton of restartButtons) {

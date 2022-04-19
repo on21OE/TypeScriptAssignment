@@ -35,7 +35,7 @@ body {
     margin-right: 20px;
 }
 
-.instructions {
+#instructions {
     background-color: #795464;
     position: fixed;
     top: 50%;
@@ -48,6 +48,7 @@ body {
     color: white;
     height: 80vh;
     overflow: scroll;
+    display: none;
 }
 
 .instructions-header {
@@ -57,11 +58,11 @@ body {
     align-items: center;
 }
 
-.instructions h2 {
+#instructions h2 {
     margin: 10px 0px;
 }
 
-.instructions h3 {
+#instructions h3 {
     margin-bottom: 0;
 }
 
@@ -69,7 +70,7 @@ body {
     padding: 10px 20px;
 }
 
-.instructions table {
+#instructions table {
     margin: 0;
     margin-top: 30px;
 }
@@ -78,7 +79,7 @@ body {
     display: none;
 }
 
-.close {
+#instructions-close {
     background-color: #795464;
     border: none;
     color: white;
@@ -95,7 +96,7 @@ body {
     transition: 200ms;
 }
 
-.close:hover {
+#instructions-close:hover {
     background-color: #8C7489;
 }
 
