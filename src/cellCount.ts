@@ -4,6 +4,11 @@ import { enter, del, letters } from "./inputs";
 export let colCount = 0;
 export let rowCount = 0;
 
+export function resetCounts() {
+  colCount = 0;
+  rowCount = 0;
+}
+
 function checkIfRowIsFilled() {
   for (let i = 0; i < correctWordLength; i++) {
     if (getCell(rowCount, i)!.innerHTML === "") {

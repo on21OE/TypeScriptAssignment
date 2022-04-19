@@ -1,4 +1,6 @@
-import { colCount, rowCount } from "./cellCount";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "../node_modules/typescript/lib/typescript";
+import { colCount, resetCounts, rowCount } from "./cellCount";
+import { letters, i } from "./inputs";
 
 const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
 const instructionsOpenButton = document.getElementById("instructions-button") as HTMLButtonElement;
@@ -9,9 +11,9 @@ const easyModeButton = document.getElementById("easy") as HTMLButtonElement;
 const normalModeButton = document.getElementById("normal") as HTMLButtonElement;
 const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
 
-const easyWordList: string[] =["baum"]
-const normalWordList: string[] = ["feder" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
-const hardWordList: string[] = ["banane"]
+const easyWordList: string[] =["baum", "bein", "maus", "fein", "frau", "senf", "igel", "hund"]
+const normalWordList: string[] = ["kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze"]
+const hardWordList: string[] = ["banane", "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz"]
 
 export let correctWordLength = 5;
 let correctWord: string;
@@ -19,20 +21,63 @@ let correctWordArray: string[];
 
 let currentWordArray: string[] = [];
 
-generateCells();
-markCurrentCell(false);
-getCorrectWord();
+startGame();
+function startGame() {
+    currentWordArray = [];
+    generateCells();
+    markCurrentCell(false);
+    getCorrectWord();
+}
+
+function restartGame() {
+    currentWordArray = [];
+    clearCells();
+    generateCells();
+    resetCounts();
+    markCurrentCell(false);
+    getCorrectWord();
+    for (let letter of letters) {
+        letter.classList.remove("correctLetters");
+        letter.classList.remove("existingLetters");
+        letter.classList.remove("wrongLetters");
+    }
+    document.getElementById("settings")!.style.display = "none";
+    document.getElementById("winningScreen")!.classList.remove("show");
+    document.getElementById("losingScreen")!.classList.remove("show");
+;}
+
+easyModeButton.addEventListener("click", changeToEasy);
+normalModeButton.addEventListener("click", changeToNormal);
+hardModeButton.addEventListener("click", changeToHard);
+
+function changeToEasy() {
+    correctWordLength = 4;
+    restartGame();
+}
+
+function changeToNormal() {
+    correctWordLength = 5;
+    restartGame();
+}
+
+function changeToHard() {
+    correctWordLength = 6;
+    restartGame();
+}
 
 function getCorrectWord() {
     switch (correctWordLength) {
         case 4:
             correctWord = easyWordList[Math.floor(Math.random() * easyWordList.length)];
+            correctWordLength = 4;
             break;
         case 5:
             correctWord = normalWordList[Math.floor(Math.random() * normalWordList.length)];
+            correctWordLength = 5;
             break;
         case 6:
             correctWord = hardWordList[Math.floor(Math.random() * hardWordList.length)];
+            correctWordLength = 6;
             break;
     }
     correctWordArray = correctWord.split("");
@@ -70,10 +115,6 @@ function toggleSettings() {
 
 for (const restartButton of restartButtons) {
     restartButton.addEventListener("click", restartGame);
-}
-
-function restartGame() {
-    document.location.reload();
 }
 
 export function fillCellWithLetter(letter: string, rowCount: number, colCount: number) {
@@ -175,7 +216,17 @@ function generateCells() {
         for (let  j = 0; j < correctWordLength; j++) {
             let newCell = document.createElement("td");
             newCell.setAttribute("id", "cell" + i + j);
+            newCell.setAttribute("class", "cell");
             document.getElementById("row" + i)?.appendChild(newCell);
         }
     }   
+}
+
+function clearCells() {
+    const cells = document.getElementsByClassName("cell") as HTMLCollectionOf<HTMLTableCellElement>;
+    console.log(cells)
+    const cellsLength = cells.length;
+    for (let i = 0; i < cellsLength; i++) {
+         cells[0].remove();
+    }
 }
