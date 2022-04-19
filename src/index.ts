@@ -10,10 +10,11 @@ const settingsCloseButton = document.getElementById("settings-close") as HTMLBut
 const easyModeButton = document.getElementById("easy") as HTMLButtonElement;
 const normalModeButton = document.getElementById("normal") as HTMLButtonElement;
 const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
+const winRestartButton = document.getElementById("winRestart") as HTMLButtonElement;
 
-const easyWordList: string[] =["baum", "bein", "maus", "fein", "frau", "senf", "igel", "hund"]
-const normalWordList: string[] = ["kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze"]
-const hardWordList: string[] = ["banane", "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz"]
+const easyWordList: string[] =["baum", /* "bein", "maus", "fein", "frau", "senf", "igel", "hund" */]
+const normalWordList: string[] = ["kreuz", /* "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze" */]
+const hardWordList: string[] = ["banane", /* "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz" */]
 
 export let correctWordLength = 5;
 let correctWord: string;
@@ -21,6 +22,9 @@ let correctWordArray: string[];
 
 let currentWordArray: string[] = [];
 
+let winStreak = 1;
+
+winRestartButton.addEventListener("click", () => winStreak++);
 startGame();
 function startGame() {
     currentWordArray = [];
@@ -169,24 +173,25 @@ export function checkForWinner() {
         document.getElementById("winningScreen")!.classList.add("show");
         switch (rowCount) {
             case 0:
-                document.getElementById("stats")!.innerHTML = "Du hast einen Versuch (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("attempts")!.innerHTML = "Du hast einen Versuch gebraucht!";
                 break;
             case 1:
-                document.getElementById("stats")!.innerHTML = "Du hast zwei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("attempts")!.innerHTML = "Du hast zwei Versuche gebraucht!";
                 break;
             case 2:
-                document.getElementById("stats")!.innerHTML = "Du hast drei Versuche (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("attempts")!.innerHTML = "Du hast drei Versuche gebraucht!";
                 break;
             case 3:
-                document.getElementById("stats")!.innerHTML = "Du hast vier Versuche (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("attempts")!.innerHTML = "Du hast vier Versuche gebraucht!";
                 break;
             case 4:
-                document.getElementById("stats")!.innerHTML = "Du hast fünf Versuche (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("attempts")!.innerHTML = "Du hast fünf Versuche gebraucht!";
                 break;
             case 5:
-                document.getElementById("stats")!.innerHTML = "Du hast sechs Versuche (" + (rowCount + 1) + ") gebraucht!";
+                document.getElementById("attempts")!.innerHTML = "Du hast sechs Versuche gebraucht!";
                 break; 
         }
+        document.getElementById("currentWinStreak")!.innerHTML = "Deine Win-Streak: " + winStreak;
         return true;
     }
     return false;
@@ -196,6 +201,7 @@ export function checkForLoser() {
     if (rowCount === 5) {
         document.getElementById("losingScreen")!.classList.add("show");
         getCell(rowCount, colCount)?.classList.remove("currentCell");
+        document.getElementById("lostWinStreak")!.innerHTML = "Deine verlorene Win-Streak: " + (winStreak - 1);
         return true;
     }
     return false;

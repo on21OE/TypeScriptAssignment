@@ -23,12 +23,18 @@
     
     <div class="winningScreen" id="winningScreen">   
         <div>Du hast gewonnen!</div> 
-        <div id="stats"></div>
-        <button class="restart">Neues Wort</button>
+        <div class="stats">
+            <p id="attempts"></p>
+            <p id="currentWinStreak"></p>
+        </div>
+        <button class="restart" id="winRestart">Neues Wort</button>
     </div>
 
     <div class="losingScreen" id="losingScreen">   
         <div>Du hast verloren!</div>
+        <div class="stats">
+            <p id="lostWinStreak"></p>
+        </div>
         <button class="restart">Neues Wort</button>
     </div>
 
