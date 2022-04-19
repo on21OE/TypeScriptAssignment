@@ -27,6 +27,8 @@ function handleEnter() {
     rowCount = rowCount < 5 ? rowCount + 1: rowCount;
     colCount = 0;
     markCurrentCell(false);
+  } else {
+    alert("Fülle die ganze Zeile aus!")
   }
 }
 

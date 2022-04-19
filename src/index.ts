@@ -2,10 +2,10 @@ import { colCount, rowCount } from "./cellCount";
 
 const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
 
-const wordList: string[] = ["rasan" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
+const wordList: string[] = ["feder" /*"kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch" */]
 const correctWord = wordList[Math.floor(Math.random() * wordList.length)];
 const correctWordArray = correctWord.split("");
-let correctWordLength = 5;
+let correctWordLength = 6;
 
 let currentWordArray: string[] = [];
 

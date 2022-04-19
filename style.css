@@ -51,10 +51,6 @@ td {
     user-select: none;
 }
 
-td:hover {
-    background-color: #8c748962;
-}
-
 tr {
     margin: 0;
 }
@@ -89,6 +85,7 @@ tr {
     font-size: 1em;
     user-select: none;
     text-transform: uppercase;
+    transition: 200ms;
 }
 
 #enter {
@@ -125,12 +122,12 @@ tr {
 }
 
 .wrongLetters {
-    background-color: rgb(255, 255, 255);
-    color: #795464;
+    background-color: #8c748962;
+    color: #FFFFFF;
 }
 
 .wrongLetters:hover {
-    background-color: #8c748962;
+    background-color: #795464;
 }
 
 .winningScreen {
@@ -187,4 +184,3 @@ tr {
 #stats {
     font-size: 1.5rem;
 }
-
