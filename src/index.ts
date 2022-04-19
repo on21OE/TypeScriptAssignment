@@ -37,7 +37,11 @@ instructionsOpenButton.addEventListener("click", openInstructions);
 instructionsCloseButton.addEventListener("click", closeInstructions);
 
 function openInstructions() {
-    document.getElementById("instructions")!.style.display = "block";
+    if (document.getElementById("instructions")!.style.display === "block") {
+        document.getElementById("instructions")!.style.display = "none";
+    } else {
+        document.getElementById("instructions")!.style.display = "block";
+    }
 }
 
 function closeInstructions() {

@@ -65,7 +65,9 @@ for (let letter of letters) {
 document.addEventListener('keydown', (event) => {
   const validKeys = "abcdefghijklmnopqrstuvwxyz"
   const keyName = event.key;
-  if (document.getElementById("winningScreen")!.classList.contains("show") || document.getElementById("losingScreen")!.classList.contains("show")) {
+  if (document.getElementById("winningScreen")!.classList.contains("show") 
+  || document.getElementById("losingScreen")!.classList.contains("show") 
+  || document.getElementById("instructions")!.style.display === "block") {
     return;
   }
   if (keyName === "Enter") {

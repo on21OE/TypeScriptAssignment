@@ -79,15 +79,28 @@
             <p>Keiner der Buchstaben befindet sich in dem Wort.</p>
             <h3>Schwierigkeitsgrade:</h3>
             <p>Der ausgewählte Schwierigkeitsgrad entscheidet über die Wortlänge des Lösungswortes.</p>
-            <p>Einfach: 4</p>
-            <p>Normal: 5</p>
-            <p>Schwierig: 6</p>
+            <p>Einfach: 4 Buchstaben</p>
+            <p>Normal: 5 Buchstaben</p>
+            <p>Schwierig: 6 Buchstaben</p>
             <p>Standardmäßig wird im normalen Modus gespielt.</p>
         </div>
     </div>
 
-    <div class="settings">
-        <div>Das sind Settings</div>
+    <div id="settings">
+        <div class="settings-header">
+            <h2>Einstellungen</h2>
+            <button id="settings-close">X</button>
+        </div>
+        <div class="settings-text">
+            <h3>Schwierigkeitsgrad</h3>
+            <div class="difficulty">
+                <button class="difficulty-buttons" id="easy">Leicht</button>
+                <button class="difficulty-buttons" id="normal">Normal</button>
+                <button class="difficulty-buttons" id="hard">Schwierig</button>
+            </div>
+            <p>Achtung: Wenn du einen neuen Schwierigkeitsgrad auswählst, wird dein aktueller Spielfortschritt gelöscht!</p>
+        </div>
+
 
     </div>
 
@@ -100,7 +113,7 @@
         <tr id="row5"></tr>
     </table>
 
-    <div class="buttons">
+    <div class="keys">
         <div class="keysRow0">
             <button class="letters" id="q">q</button>
             <button class="letters" id="w">w</button>

@@ -33,6 +33,15 @@ body {
 .header span {
     color: white;
     margin-right: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin: 0;
+    user-select: none;
 }
 
 #instructions {
@@ -51,22 +60,26 @@ body {
     display: none;
 }
 
-.instructions-header {
+.instructions-header,
+.settings-header {
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#instructions h2 {
+#instructions h2,
+#settings h2 {
     margin: 10px 0px;
 }
 
-#instructions h3 {
+#instructions h3,
+#settings h3 {
     margin-bottom: 0;
 }
 
-.instructions-text {
+.instructions-text,
+.settings-text {
     padding: 10px 20px;
 }
 
@@ -75,11 +88,8 @@ body {
     margin-top: 30px;
 }
 
-.settings {
-    display: none;
-}
-
-#instructions-close {
+#instructions-close,
+#settings-close {
     background-color: #795464;
     border: none;
     color: white;
@@ -96,15 +106,46 @@ body {
     transition: 200ms;
 }
 
-#instructions-close:hover {
+#instructions-close:hover,
+#settings-close:hover {
     background-color: #8C7489;
 }
 
-h1 {
-    text-align: center;
+#settings {
+    background-color: #795464;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    z-index: 9;
+    width: 500px;
+    max-width: 80%;
     color: white;
-    margin: 0;
-    user-select: none;
+    height: 30vh;
+}
+
+.difficulty {
+    align-items: center;
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.difficulty-buttons {
+    font-size: 1rem;
+    width: 120px;
+    height: 50px;
+    background-color: #795464;
+    border : none;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    color: white;
+}
+
+.difficulty-buttons:hover {
+    background-color: #8C7489;
 }
 
 table {
@@ -113,7 +154,6 @@ table {
     border-spacing: 3px;
     margin-top: 50px;
     margin-bottom: 48px;
-
 }
 
 td {
@@ -140,7 +180,7 @@ tr {
     background-color: #8c748962;
 }
 
-.buttons {
+.keys {
     margin: 0 auto;
     text-align: center;
     bottom: 0;
