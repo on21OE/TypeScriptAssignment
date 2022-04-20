@@ -1,6 +1,7 @@
-import { collapseTextChangeRangesAcrossMultipleVersions } from "../node_modules/typescript/lib/typescript";
-import { colCount, resetCounts, rowCount } from "./cellCount";
+import { clickInCell, colCount, resetCounts, rowCount } from "./cellCount";
 import { letters, i } from "./inputs";
+
+export const cells = document.getElementsByClassName("cell") as HTMLCollectionOf<HTMLTableCellElement>;
 
 const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
 const instructionsOpenButton = document.getElementById("instructions-button") as HTMLButtonElement;
@@ -12,9 +13,9 @@ const normalModeButton = document.getElementById("normal") as HTMLButtonElement;
 const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
 const winRestartButton = document.getElementById("winRestart") as HTMLButtonElement;
 
-const easyWordList: string[] =["baum", /* "bein", "maus", "fein", "frau", "senf", "igel", "hund" */]
+const easyWordList: string[] =["baum", "bein", "maus", "fein", "frau", "senf", "igel", "hund"]
 const normalWordList: string[] = ["kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze"]
-const hardWordList: string[] = ["banane", /* "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz" */]
+const hardWordList: string[] = ["banane", "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz", "uterus"]
 
 export let correctWordLength = 5;
 let correctWord: string;
@@ -39,6 +40,7 @@ startGame();
 function startGame() {
     currentWordArray = [];
     generateCells();
+    clickInCell();
     markCurrentCell(false);
     getCorrectWord();
 }
@@ -47,6 +49,7 @@ function restartGame() {
     currentWordArray = [];
     clearCells();
     generateCells();
+    clickInCell();
     resetCounts();
     markCurrentCell(false);
     getCorrectWord();
@@ -215,9 +218,9 @@ function generateCells() {
 }
 
 function clearCells() {
-    const cells = document.getElementsByClassName("cell") as HTMLCollectionOf<HTMLTableCellElement>;
     const cellsLength = cells.length;
     for (let i = 0; i < cellsLength; i++) {
          cells[0].remove();
     }
 }
+

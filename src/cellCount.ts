@@ -1,4 +1,4 @@
-import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner, markCurrentCell, checkForLoser, correctWordLength } from "./index";
+import { fillCellWithLetter, getCurrentWord, compareWords, getCell, checkForWinner, markCurrentCell, checkForLoser, correctWordLength, cells } from "./index";
 import { enter, del, letters } from "./inputs";
 
 export let colCount = 0;
@@ -28,9 +28,13 @@ function handleEnter() {
     if (checkForLoser()) {
       return;
     }
+    for (const currentCell of document.getElementsByClassName("currentCell")) {
+      currentCell.classList.remove("currentCell");
+    }
     getCell(rowCount, (correctWordLength - 1))!.classList.remove("currentCell");
     rowCount = rowCount < 5 ? rowCount + 1: rowCount;
     colCount = 0;
+    clickInCell();
     markCurrentCell(false);
   } else {
     alert("Fülle die ganze Zeile aus!")
@@ -86,3 +90,21 @@ document.addEventListener('keydown', (event) => {
     handleLetterInput(keyName.toLowerCase())
   }
 });
+
+export function clickInCell() {
+  for (const cell of cells) {
+    cell.addEventListener("click", 
+      () => {
+        const cellRowCount = Number.parseInt(cell.id.substring(4, 5));
+        const cellColCount = Number.parseInt(cell.id.substring(5));
+        if (cellRowCount === rowCount) {
+          for (const currentCell of document.getElementsByClassName("currentCell")) {
+            currentCell.classList.remove("currentCell");
+          }
+          cell.classList.add("currentCell");
+          colCount = cellColCount;
+        }
+      }
+    )
+  }
+}
