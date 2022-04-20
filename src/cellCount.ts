@@ -89,6 +89,12 @@ document.addEventListener('keydown', (event) => {
   if (validKeys.includes(keyName)) {
     handleLetterInput(keyName.toLowerCase())
   }
+  if (keyName === "ArrowLeft") {
+    handleArrowKey(true);
+  }
+  if (keyName === "ArrowRight") {
+    handleArrowKey(false);
+  }
 });
 
 export function clickInCell() {
@@ -106,5 +112,15 @@ export function clickInCell() {
         }
       }
     )
+  }
+}
+
+function handleArrowKey(isArrowLeft: boolean) {
+  if (!((isArrowLeft && colCount === 0) || (!isArrowLeft && colCount === (correctWordLength - 1)))) {
+    for (const currentCell of document.getElementsByClassName("currentCell")) {
+      currentCell.classList.remove("currentCell");
+    }
+    colCount = isArrowLeft ? colCount - 1 : colCount + 1;
+    getCell(rowCount, colCount)?.classList.add("currentCell");
   }
 }
