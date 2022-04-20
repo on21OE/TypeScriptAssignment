@@ -9,6 +9,12 @@ export function resetCounts() {
   rowCount = 0;
 }
 
+function deleteCurrentCells() {
+  for (const currentCell of document.getElementsByClassName("currentCell")) {
+    currentCell.classList.remove("currentCell");
+  }
+}
+
 function checkIfRowIsFilled() {
   for (let i = 0; i < correctWordLength; i++) {
     if (getCell(rowCount, i)!.innerHTML === "") {
@@ -28,10 +34,7 @@ function handleEnter() {
     if (checkForLoser()) {
       return;
     }
-    for (const currentCell of document.getElementsByClassName("currentCell")) {
-      currentCell.classList.remove("currentCell");
-    }
-    getCell(rowCount, (correctWordLength - 1))!.classList.remove("currentCell");
+    deleteCurrentCells();
     rowCount = rowCount < 5 ? rowCount + 1: rowCount;
     colCount = 0;
     clickInCell();
@@ -49,6 +52,14 @@ function handleDelete() {
   }
   colCount = colCount > 0 ? colCount - 1: colCount;
   markCurrentCell(true);
+}
+
+function handleArrowKey(isArrowLeft: boolean) {
+  if (!((isArrowLeft && colCount === 0) || (!isArrowLeft && colCount === (correctWordLength - 1)))) {
+    deleteCurrentCells();
+    colCount = isArrowLeft ? colCount - 1 : colCount + 1;
+    getCell(rowCount, colCount)?.classList.add("currentCell");
+  }
 }
 
 function handleLetterInput(letter: string) {
@@ -86,14 +97,14 @@ document.addEventListener('keydown', (event) => {
   if (keyName === "Backspace") {
     handleDelete();
   }
-  if (validKeys.includes(keyName)) {
-    handleLetterInput(keyName.toLowerCase())
-  }
   if (keyName === "ArrowLeft") {
     handleArrowKey(true);
   }
   if (keyName === "ArrowRight") {
     handleArrowKey(false);
+  }
+  if (validKeys.includes(keyName)) {
+    handleLetterInput(keyName.toLowerCase())
   }
 });
 
@@ -104,23 +115,11 @@ export function clickInCell() {
         const cellRowCount = Number.parseInt(cell.id.substring(4, 5));
         const cellColCount = Number.parseInt(cell.id.substring(5));
         if (cellRowCount === rowCount) {
-          for (const currentCell of document.getElementsByClassName("currentCell")) {
-            currentCell.classList.remove("currentCell");
-          }
+          deleteCurrentCells();
           cell.classList.add("currentCell");
           colCount = cellColCount;
         }
       }
     )
-  }
-}
-
-function handleArrowKey(isArrowLeft: boolean) {
-  if (!((isArrowLeft && colCount === 0) || (!isArrowLeft && colCount === (correctWordLength - 1)))) {
-    for (const currentCell of document.getElementsByClassName("currentCell")) {
-      currentCell.classList.remove("currentCell");
-    }
-    colCount = isArrowLeft ? colCount - 1 : colCount + 1;
-    getCell(rowCount, colCount)?.classList.add("currentCell");
   }
 }

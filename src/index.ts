@@ -1,5 +1,5 @@
 import { clickInCell, colCount, resetCounts, rowCount } from "./cellCount";
-import { letters, i } from "./inputs";
+import { letters } from "./inputs";
 
 export const cells = document.getElementsByClassName("cell") as HTMLCollectionOf<HTMLTableCellElement>;
 
@@ -47,7 +47,7 @@ function startGame() {
 
 function restartGame() {
     currentWordArray = [];
-    clearCells();
+    deleteCells();
     generateCells();
     clickInCell();
     resetCounts();
@@ -217,10 +217,9 @@ function generateCells() {
     }   
 }
 
-function clearCells() {
+function deleteCells() {
     const cellsLength = cells.length;
     for (let i = 0; i < cellsLength; i++) {
          cells[0].remove();
     }
 }
-
