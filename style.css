@@ -314,6 +314,7 @@ tr {
 }
 
 #attempts,
+#correctWord,
 #currentWinStreak,
 #lostWinStreak {
     font-size: 1.5rem;

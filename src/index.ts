@@ -13,9 +13,9 @@ const normalModeButton = document.getElementById("normal") as HTMLButtonElement;
 const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
 const winRestartButton = document.getElementById("winRestart") as HTMLButtonElement;
 
-const easyWordList: string[] =["baum", "bein", "maus", "fein", "frau", "senf", "igel", "hund"]
+const easyWordList: string[] =["baum", "bein", "maus", "fein", "frau", "senf", "igel", "hund", "dose"]
 const normalWordList: string[] = ["kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze"]
-const hardWordList: string[] = ["banane", "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz", "uterus"]
+const hardWordList: string[] = ["banane", "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz", "mutter"]
 
 export let correctWordLength = 5;
 let correctWord: string;
@@ -190,6 +190,7 @@ export function checkForLoser() {
         document.getElementById("losingScreen")!.classList.add("show");
         getCell(rowCount, colCount)?.classList.remove("currentCell");
         document.getElementById("lostWinStreak")!.innerHTML = "Deine verlorene Win-Streak: " + (winStreak - 1);
+        document.getElementById("correctWord")!.innerHTML = "Das richtige Wort war: " + correctWord.toUpperCase();
         winStreak = 1;
         return true;
     }
