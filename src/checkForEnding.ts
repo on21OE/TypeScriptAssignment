@@ -1,5 +1,6 @@
 import { rowCount, colCount } from "./cellCount";
-import { correctWord, correctWordArray, currentWordArray, getCell } from "./index";
+import { getCell } from "./cellGeneration";
+import { correctWord, correctWordArray, currentWordArray } from "./index";
 
 export let winStreak = 1;
 
