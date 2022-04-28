@@ -87,9 +87,7 @@ document.addEventListener('keydown', (event) => {
   const validKeys = "ABCDEFGAHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
   const keyName = event.key;
   if (document.getElementById("winningScreen")!.classList.contains("show") 
-  || document.getElementById("losingScreen")!.classList.contains("show") 
-  || document.getElementById("instructions")!.style.display === "block"
-  || document.getElementById("settings")!.style.display === "block") {
+  || document.getElementById("losingScreen")!.classList.contains("show")) {
     return;
   }
   if (keyName === "Enter") {

@@ -1,5 +1,5 @@
 import { rowCount, colCount } from "./cellCount";
-import { correctWord, correctWordArray, currentWordArray, getCell, winRestartButton } from "./index";
+import { correctWord, correctWordArray, currentWordArray, getCell } from "./index";
 
 export let winStreak = 1;
 
@@ -35,6 +35,8 @@ export function checkForWinner() {
 export function checkForLoser() {
     if (rowCount === 5) {
         document.getElementById("losingScreen")!.classList.add("show");
+        document.getElementById("settings")!.style.display = "none";
+        document.getElementById("instructions")!.style.display = "none";
         getCell(rowCount, colCount)?.classList.remove("currentCell");
         document.getElementById("lostWinStreak")!.innerHTML = "Deine verlorene Win-Streak: " + (winStreak - 1);
         document.getElementById("correctWord")!.innerHTML = "Das richtige Wort war: " + correctWord.toUpperCase();
