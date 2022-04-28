@@ -1,31 +1,30 @@
 import { clickInCell, colCount, resetCounts, rowCount } from "./cellCount";
+import { countWinStreak } from "./checkForEnding";
 import { letters } from "./inputs";
 
 export const cells = document.getElementsByClassName("cell") as HTMLCollectionOf<HTMLTableCellElement>;
 
-const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
-const instructionsOpenButton = document.getElementById("instructions-button") as HTMLButtonElement;
-const instructionsCloseButton = document.getElementById("instructions-close") as HTMLButtonElement;
-const settingsOpenButton = document.getElementById("settings-button") as HTMLButtonElement;
-const settingsCloseButton = document.getElementById("settings-close") as HTMLButtonElement;
-const easyModeButton = document.getElementById("easy") as HTMLButtonElement;
-const normalModeButton = document.getElementById("normal") as HTMLButtonElement;
-const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
-const winRestartButton = document.getElementById("winRestart") as HTMLButtonElement;
+export const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
+export const instructionsOpenButton = document.getElementById("instructions-button") as HTMLButtonElement;
+export const instructionsCloseButton = document.getElementById("instructions-close") as HTMLButtonElement;
+export const settingsOpenButton = document.getElementById("settings-button") as HTMLButtonElement;
+export const settingsCloseButton = document.getElementById("settings-close") as HTMLButtonElement;
+export const easyModeButton = document.getElementById("easy") as HTMLButtonElement;
+export const normalModeButton = document.getElementById("normal") as HTMLButtonElement;
+export const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
+export const winRestartButton = document.getElementById("winRestart") as HTMLButtonElement;
 
 const easyWordList: string[] =["baum", "bein", "maus", "fein", "frau", "senf", "igel", "hund", "dose"]
-const normalWordList: string[] = ["kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze"]
+const normalWordList: string[] = ["kreuz", /*"feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze" */]
 const hardWordList: string[] = ["banane", "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz", "mutter"]
 
 export let correctWordLength = 5;
-let correctWord: string;
-let correctWordArray: string[];
+export let correctWord: string;
+export let correctWordArray: string[];
 
-let currentWordArray: string[] = [];
+export let currentWordArray: string[] = [];
 
-let winStreak = 1;
-
-winRestartButton.addEventListener("click", () => winStreak++);
+winRestartButton.addEventListener("click", () => countWinStreak());
 
 easyModeButton.addEventListener("click", () => changeDifficulty(4));
 normalModeButton.addEventListener("click", () => changeDifficulty(5));
@@ -156,46 +155,7 @@ export function getCell(pRowCount: number, pColCount: number) {
     return document.getElementById("cell" + pRowCount.toString() + pColCount);
 }
 
-export function checkForWinner() {
-    if (currentWordArray.toString() === correctWordArray.toString()) {
-        document.getElementById("winningScreen")!.classList.add("show");
-        switch (rowCount) {
-            case 0:
-                document.getElementById("attempts")!.innerHTML = "Du hast einen Versuch gebraucht!";
-                break;
-            case 1:
-                document.getElementById("attempts")!.innerHTML = "Du hast zwei Versuche gebraucht!";
-                break;
-            case 2:
-                document.getElementById("attempts")!.innerHTML = "Du hast drei Versuche gebraucht!";
-                break;
-            case 3:
-                document.getElementById("attempts")!.innerHTML = "Du hast vier Versuche gebraucht!";
-                break;
-            case 4:
-                document.getElementById("attempts")!.innerHTML = "Du hast fünf Versuche gebraucht!";
-                break;
-            case 5:
-                document.getElementById("attempts")!.innerHTML = "Du hast sechs Versuche gebraucht!";
-                break; 
-        }
-        document.getElementById("currentWinStreak")!.innerHTML = "Deine Win-Streak: " + winStreak;
-        return true;
-    }
-    return false;
-}
 
-export function checkForLoser() {
-    if (rowCount === 5) {
-        document.getElementById("losingScreen")!.classList.add("show");
-        getCell(rowCount, colCount)?.classList.remove("currentCell");
-        document.getElementById("lostWinStreak")!.innerHTML = "Deine verlorene Win-Streak: " + (winStreak - 1);
-        document.getElementById("correctWord")!.innerHTML = "Das richtige Wort war: " + correctWord.toUpperCase();
-        winStreak = 1;
-        return true;
-    }
-    return false;
-}
 
 export function markCurrentCell(isLetterDeleted: boolean) {
     getCell(rowCount, colCount)!.classList.add("currentCell")
