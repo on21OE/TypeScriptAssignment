@@ -1,6 +1,6 @@
 import { getCell, markCurrentCell } from "./cellGeneration";
 import { checkForLoser, checkForWinner } from "./checkForEnding";
-import { fillCellWithLetter, getCurrentWord, compareWords, correctWordLength, cells } from "./index";
+import { getCurrentWord, compareWords, correctWordLength, cells } from "./index";
 import { enter, del, letters } from "./inputs";
 
 export let colCount = 0;
@@ -65,7 +65,7 @@ function handleArrowKey(isArrowLeft: boolean) {
 }
 
 function handleLetterInput(letter: string) {
-  fillCellWithLetter(letter, rowCount, colCount);
+  getCell(rowCount, colCount)!.innerHTML = letter;
   colCount = colCount < (correctWordLength - 1) ? colCount + 1: colCount;
   markCurrentCell(false);
 }

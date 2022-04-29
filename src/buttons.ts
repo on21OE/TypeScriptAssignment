@@ -1,5 +1,6 @@
 import { countWinStreak } from "./checkForEnding";
-import { changeDifficulty, toggleNavBarElements } from "./index";
+import { toggleNavBarElements } from "./handlePopUps";
+import { changeDifficulty} from "./index";
 
 export const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
 export const instructionsOpenButton = document.getElementById("instructions-button") as HTMLButtonElement;

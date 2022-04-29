@@ -1,5 +1,5 @@
 import { restartButtons } from "./buttons";
-import { clickInCell, colCount, resetCounts, rowCount } from "./cellCount";
+import { clickInCell, resetCounts, rowCount } from "./cellCount";
 import { deleteCells, generateCells, getCell, markCurrentCell } from "./cellGeneration";
 import { letters } from "./inputs";
 
@@ -62,34 +62,8 @@ function getCorrectWord() {
     correctWordArray = correctWord.split("");
 }
 
-export function toggleNavBarElements(isInstructions: boolean) {
-    if(isInstructions) {
-        if (document.getElementById("settings")!.style.display === "block") {
-            document.getElementById("settings")!.style.display = "none";
-        } 
-        if (document.getElementById("instructions")!.style.display === "block") {
-            document.getElementById("instructions")!.style.display = "none";
-        } else {
-            document.getElementById("instructions")!.style.display = "block";
-        }
-    } else {
-        if (document.getElementById("instructions")!.style.display === "block") {
-            document.getElementById("instructions")!.style.display = "none";
-        }
-        if (document.getElementById("settings")!.style.display === "block") {
-            document.getElementById("settings")!.style.display = "none";
-        } else {
-            document.getElementById("settings")!.style.display = "block";
-        }
-    }
-}
-
 for (const restartButton of restartButtons) {
     restartButton.addEventListener("click", restartGame);
-}
-
-export function fillCellWithLetter(letter: string, rowCount: number, colCount: number) {
-    getCell(rowCount, colCount)!.innerHTML = letter;
 }
 
 export function getCurrentWord() {
@@ -130,4 +104,3 @@ export function compareWords() {
         }
     }
 }
-
