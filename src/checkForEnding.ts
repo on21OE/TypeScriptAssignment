@@ -7,6 +7,8 @@ export let winStreak = 1;
 export function checkForWinner() {
     if (currentWordArray.toString() === correctWordArray.toString()) {
         document.getElementById("winningScreen")!.classList.add("show");
+        document.getElementById("settings")!.style.display = "none";
+        document.getElementById("instructions")!.style.display = "none";
         switch (rowCount) {
             case 0:
                 document.getElementById("attempts")!.innerHTML = "Du hast einen Versuch gebraucht!";
@@ -40,7 +42,7 @@ export function checkForLoser() {
         document.getElementById("instructions")!.style.display = "none";
         getCell(rowCount, colCount)?.classList.remove("currentCell");
         document.getElementById("lostWinStreak")!.innerHTML = "Deine verlorene Win-Streak: " + (winStreak - 1);
-        document.getElementById("correctWord")!.innerHTML = "Das richtige Wort war: " + correctWord.toUpperCase();
+        document.getElementById("correctWord")!.innerHTML = "Das richtige Wort war: " + correctWordArray[0].toUpperCase() + correctWord.slice(1);
         winStreak = 1;
         return true;
     }
