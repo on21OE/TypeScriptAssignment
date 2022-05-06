@@ -49,8 +49,10 @@ function handleEnter() {
 function handleDelete() {
   if (getCell(rowCount, colCount)!.innerHTML === "" && colCount !== 0) {
     getCell(rowCount, (colCount - 1))!.innerHTML = "";
+    getCell(rowCount, (colCount - 1))!.classList.remove("letterShrink");
   } else {
     getCell(rowCount, colCount)!.innerHTML = "";
+    getCell(rowCount, colCount)!.classList.remove("letterShrink");
   }
   colCount = colCount > 0 ? colCount - 1: colCount;
   markCurrentCell(true);
@@ -66,6 +68,7 @@ function handleArrowKey(isArrowLeft: boolean) {
 
 function handleLetterInput(letter: string) {
   getCell(rowCount, colCount)!.innerHTML = letter;
+  getCell(rowCount, colCount)!.classList.add("letterShrink");
   colCount = colCount < (correctWordLength - 1) ? colCount + 1: colCount;
   markCurrentCell(false);
 }
