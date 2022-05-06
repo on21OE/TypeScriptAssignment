@@ -1,8 +1,8 @@
-import { __classPrivateFieldSet } from "../node_modules/tslib/tslib";
 import { getCell, markCurrentCell } from "./cellGeneration";
 import { checkForLoser, checkForWinner } from "./checkForEnding";
-import { getCurrentWord, compareWords, correctWordLength, cells } from "./index";
+import { cells } from "./index";
 import { enter, del, letters } from "./inputs";
+import { compareWords, correctWordLength, getCurrentWord } from "./words";
 
 export let colCount = 0;
 export let rowCount = 0;
@@ -26,6 +26,30 @@ function checkIfRowIsFilled() {
   }
   return true;
 }
+
+document.addEventListener("keydown", (event) => {
+  const validKeys = "ABCDEFGAHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+  const keyName = event.key;
+  if (document.getElementById("winningScreen")!.classList.contains("show") 
+  || document.getElementById("losingScreen")!.classList.contains("show")) {
+    return;
+  }
+  if (keyName === "Enter") {
+    handleEnter();
+  }
+  if (keyName === "Backspace") {
+    handleDelete();
+  }
+  if (keyName === "ArrowLeft") {
+    handleArrowKey(true);
+  }
+  if (keyName === "ArrowRight") {
+    handleArrowKey(false);
+  }
+  if (validKeys.includes(keyName)) {
+    handleLetterInput(keyName.toLowerCase())
+  }
+});
 
 function handleEnter() {
   if (checkIfRowIsFilled()) {
@@ -89,30 +113,6 @@ for (let letter of letters) {
     handleLetterInput(letter.innerHTML);
   }
 }
-
-document.addEventListener('keydown', (event) => {
-  const validKeys = "ABCDEFGAHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-  const keyName = event.key;
-  if (document.getElementById("winningScreen")!.classList.contains("show") 
-  || document.getElementById("losingScreen")!.classList.contains("show")) {
-    return;
-  }
-  if (keyName === "Enter") {
-    handleEnter();
-  }
-  if (keyName === "Backspace") {
-    handleDelete();
-  }
-  if (keyName === "ArrowLeft") {
-    handleArrowKey(true);
-  }
-  if (keyName === "ArrowRight") {
-    handleArrowKey(false);
-  }
-  if (validKeys.includes(keyName)) {
-    handleLetterInput(keyName.toLowerCase())
-  }
-});
 
 export function clickInCell() {
   for (const cell of cells) {

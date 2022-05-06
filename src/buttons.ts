@@ -1,6 +1,7 @@
 import { countWinStreak } from "./checkForEnding";
 import { toggleNavBarElements } from "./handlePopUps";
-import { changeDifficulty} from "./index";
+import { restartGame} from "./index";
+import { changeDifficulty } from "./words";
 
 export const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
 export const instructionsOpenButton = document.getElementById("instructions-button") as HTMLButtonElement;
@@ -11,6 +12,7 @@ export const easyModeButton = document.getElementById("easy") as HTMLButtonEleme
 export const normalModeButton = document.getElementById("normal") as HTMLButtonElement;
 export const hardModeButton = document.getElementById("hard") as HTMLButtonElement;
 export const winRestartButton = document.getElementById("winRestart") as HTMLButtonElement;
+export const winScreen = document.getElementById("winningScreen") as HTMLDivElement;
 
 winRestartButton.addEventListener("click", () => countWinStreak());
 

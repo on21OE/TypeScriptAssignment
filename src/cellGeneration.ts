@@ -1,5 +1,6 @@
 import { rowCount, colCount } from "./cellCount";
-import { correctWordLength, cells } from "./index";
+import { cells } from "./index";
+import { correctWordLength } from "./words";
 
 export function getCell(pRowCount: number, pColCount: number) {
     return document.getElementById("cell" + pRowCount.toString() + pColCount);
