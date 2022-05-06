@@ -1,3 +1,4 @@
+import { __classPrivateFieldSet } from "../node_modules/tslib/tslib";
 import { getCell, markCurrentCell } from "./cellGeneration";
 import { checkForLoser, checkForWinner } from "./checkForEnding";
 import { getCurrentWord, compareWords, correctWordLength, cells } from "./index";
@@ -42,7 +43,7 @@ function handleEnter() {
     clickInCell();
     markCurrentCell(false);
   } else {
-    alert("Fülle die ganze Zeile aus!")
+    document.getElementById("warning")!.style.display = "flex";
   }
 }
 
@@ -56,6 +57,7 @@ function handleDelete() {
   }
   colCount = colCount > 0 ? colCount - 1: colCount;
   markCurrentCell(true);
+  document.getElementById("warning")!.style.display = "none";
 }
 
 function handleArrowKey(isArrowLeft: boolean) {
@@ -71,6 +73,7 @@ function handleLetterInput(letter: string) {
   getCell(rowCount, colCount)!.classList.add("letterShrink");
   colCount = colCount < (correctWordLength - 1) ? colCount + 1: colCount;
   markCurrentCell(false);
+  document.getElementById("warning")!.style.display = "none";
 }
 
 enter.onclick = function() {

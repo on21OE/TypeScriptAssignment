@@ -1,157 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wörtchen</title>
-    <script defer src="./build/bundle.js"></script>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="./WörtchenLogo.png">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap');
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wörtchen</title>
+        <script defer src="./build/bundle.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="./WörtchenLogo.png">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap');
+        </style>
+    </head>
 
-<body>
-    <div class="header">
-        <h1>Wörtchen</h1>
-        <div>
-            <span id="instructions-button">Anleitung</span>
-            <span id="settings-button">Einstellungen</span>
-        </div>
-    </div>
-    
-    <div class="winningScreen" id="winningScreen">   
-        <div>Du hast gewonnen!</div> 
-        <div class="stats">
-            <p id="attempts"></p>
-            <p id="currentWinStreak"></p>
-        </div>
-        <button class="restart" id="winRestart">Neues Wort</button>
-    </div>
-
-    <div class="losingScreen" id="losingScreen">   
-        <div>Du hast verloren!</div>
-        <div class="stats">
-            <p id="correctWord"></p>
-            <p id="lostWinStreak"></p>
-        </div>
-        <button class="restart">Neues Wort</button>
-    </div>
-
-    <div id="instructions">
-        <div class="instructions-header">
-            <h2>Anleitung</h2>
-            <button id="instructions-close">X</button>
-        </div>
-        <div class="instructions-text">
-            <h3>Ziel des Spiels:</h3>
-            <p>Das Ziel des Spiels ist es ein Wort zu erraten.</p>
-            <h3>Ablauf des Spiels:</h3>
-            <p>Um das Wort zu erraten hat man sechs Versuche. Dafür gibt man einen Begriff in der vorgegebenen Länge ein.</p>
-            <p>Dies ist entweder mit den Buttons auf dem Bildschirm oder der Tastatur möglich.</p>
-            <p>Um ein Wort zu bestätigen muss man Enter drücken.</p>
-            <h3>Hinweise: </h3>
-            <p>Nach jedem eingegebenen Wort erhält man Hinweise, die helfen können den gesuchten Begriff zu erraten.</p>
-            <p>Diese werden durch folgende farbliche Markierungen gekennzeichnet:</p>
-            <table>
-                <tr>
-                    <td class="correctLetters">k</td>
-                    <td>l</td>
-                    <td>e</td>
-                    <td>i</td>
-                    <td>d</td>
-                </tr>
-            </table>
-            <p>Das "K" befindet sich in dem Wort und ist genau an dieser Stelle.</p>
-            <table>
-                <tr>
-                    <td>a</td>
-                    <td>p</td>
-                    <td>f</td>
-                    <td class="existingLetters">e</td>
-                    <td>l</td>
-                </tr>
-            </table>
-            <p>Das "E" befindet sich in dem Wort, aber ist an einer anderen Stelle.</p>
-            <table>
-                <tr>
-                    <td>m</td>
-                    <td>o</td>
-                    <td>t</td>
-                    <td>o</td>
-                    <td>r</td>
-                </tr>
-            </table>
-            <p>Keiner der Buchstaben befindet sich in dem Wort.</p>
-            <h3>Schwierigkeitsgrade:</h3>
-            <p>Der ausgewählte Schwierigkeitsgrad entscheidet über die Wortlänge des Lösungswortes.</p>
-            <p>Einfach: 4 Buchstaben</p>
-            <p>Normal: 5 Buchstaben</p>
-            <p>Schwierig: 6 Buchstaben</p>
-            <p>Standardmäßig wird im normalen Modus gespielt.</p>
-        </div>
-    </div>
-
-    <div id="settings">
-        <div class="settings-header">
-            <h2>Einstellungen</h2>
-            <button id="settings-close">X</button>
-        </div>
-        <div class="settings-text">
-            <h3>Schwierigkeitsgrad</h3>
-            <div class="difficulty">
-                <button class="difficulty-buttons" id="easy">Leicht</button>
-                <button class="difficulty-buttons" id="normal">Normal</button>
-                <button class="difficulty-buttons" id="hard">Schwierig</button>
+    <body>
+        <div class="header">
+            <h1>Wörtchen</h1>
+            <div>
+                <span id="instructions-button">Anleitung</span>
+                <span id="settings-button">Einstellungen</span>
             </div>
-            <p>Achtung: Wenn du einen neuen Schwierigkeitsgrad auswählst, wird dein aktueller Spielfortschritt gelöscht!</p>
         </div>
-    </div>
+        
+        <div class="winningScreen" id="winningScreen">   
+            <div>Du hast gewonnen!</div> 
+            <div class="stats">
+                <p id="attempts"></p>
+                <p id="currentWinStreak"></p>
+            </div>
+            <button class="restart" id="winRestart">Neues Wort</button>
+        </div>
 
-    <table>
-        <tr id="row0"></tr>
-        <tr id="row1"></tr>
-        <tr id="row2"></tr>
-        <tr id="row3"></tr>
-        <tr id="row4"></tr>
-        <tr id="row5"></tr>
-    </table>
+        <div class="losingScreen" id="losingScreen">   
+            <div>Du hast verloren!</div>
+            <div class="stats">
+                <p id="correctWord"></p>
+                <p id="lostWinStreak"></p>
+            </div>
+            <button class="restart">Neues Wort</button>
+        </div>
 
-    <div class="keys">
-        <div class="keysRow0">
-            <button class="letters" id="q">q</button>
-            <button class="letters" id="w">w</button>
-            <button class="letters" id="e">e</button>
-            <button class="letters" id="r">r</button>
-            <button class="letters" id="t">t</button>
-            <button class="letters" id="z">z</button>
-            <button class="letters" id="u">u</button>
-            <button class="letters" id="i">i</button>
-            <button class="letters" id="o">o</button>
-            <button class="letters" id="p">p</button>
+        <div id="instructions">
+            <div class="instructions-header">
+                <h2>Anleitung</h2>
+                <button id="instructions-close">X</button>
+            </div>
+            <div class="instructions-text">
+                <h3>Ziel des Spiels:</h3>
+                <p>Das Ziel des Spiels ist es ein Wort zu erraten.</p>
+                <h3>Ablauf des Spiels:</h3>
+                <p>Um das Wort zu erraten hat man sechs Versuche. Dafür gibt man einen Begriff in der vorgegebenen Länge ein.</p>
+                <p>Dies ist entweder mit den Buttons auf dem Bildschirm oder der Tastatur möglich.</p>
+                <p>Um ein Wort zu bestätigen muss man Enter drücken.</p>
+                <h3>Hinweise: </h3>
+                <p>Nach jedem eingegebenen Wort erhält man Hinweise, die helfen können den gesuchten Begriff zu erraten.</p>
+                <p>Diese werden durch folgende farbliche Markierungen gekennzeichnet:</p>
+                <table>
+                    <tr>
+                        <td class="correctLetters">k</td>
+                        <td>l</td>
+                        <td>e</td>
+                        <td>i</td>
+                        <td>d</td>
+                    </tr>
+                </table>
+                <p>Das "K" befindet sich in dem Wort und ist genau an dieser Stelle.</p>
+                <table>
+                    <tr>
+                        <td>a</td>
+                        <td>p</td>
+                        <td>f</td>
+                        <td class="existingLetters">e</td>
+                        <td>l</td>
+                    </tr>
+                </table>
+                <p>Das "E" befindet sich in dem Wort, aber ist an einer anderen Stelle.</p>
+                <table>
+                    <tr>
+                        <td>m</td>
+                        <td>o</td>
+                        <td>t</td>
+                        <td>o</td>
+                        <td>r</td>
+                    </tr>
+                </table>
+                <p>Keiner der Buchstaben befindet sich in dem Wort.</p>
+                <h3>Schwierigkeitsgrade:</h3>
+                <p>Der ausgewählte Schwierigkeitsgrad entscheidet über die Wortlänge des Lösungswortes.</p>
+                <p>Einfach: 4 Buchstaben</p>
+                <p>Normal: 5 Buchstaben</p>
+                <p>Schwierig: 6 Buchstaben</p>
+                <p>Standardmäßig wird im normalen Modus gespielt.</p>
+            </div>
         </div>
-        <div class="keysRow1"></div>
-            <button class="letters" id="a">a</button>
-            <button class="letters" id="s">s</button>
-            <button class="letters" id="d">d</button>
-            <button class="letters" id="f">f</button>
-            <button class="letters" id="g">g</button>
-            <button class="letters" id="h">h</button>
-            <button class="letters" id="j">j</button>
-            <button class="letters" id="k">k</button>
-            <button class="letters" id="l">l</button>
-            <button id="del">Del</button>
-        <div class="keysRow2">
-            <button class="letters" id="y">y</button>
-            <button class="letters" id="x">x</button>
-            <button class="letters" id="c">c</button>
-            <button class="letters" id="v">v</button>
-            <button class="letters" id="b">b</button>
-            <button class="letters" id="n">n</button>
-            <button class="letters" id="m">m</button>
-            <button id="enter">Enter</button>
+
+        <div id="settings">
+            <div class="settings-header">
+                <h2>Einstellungen</h2>
+                <button id="settings-close">X</button>
+            </div>
+            <div class="settings-text">
+                <h3>Schwierigkeitsgrad</h3>
+                <div class="difficulty">
+                    <button class="difficulty-buttons" id="easy">Leicht</button>
+                    <button class="difficulty-buttons" id="normal">Normal</button>
+                    <button class="difficulty-buttons" id="hard">Schwierig</button>
+                </div>
+                <p>Achtung: Wenn du einen neuen Schwierigkeitsgrad auswählst, wird dein aktueller Spielfortschritt gelöscht!</p>
+            </div>
         </div>
-    </div>
+
+        <div id="warning">
+            <span>Fülle die gesamte Zeile aus!</span>
+        </div>
+        <table>
+            <tr id="row0"></tr>
+            <tr id="row1"></tr>
+            <tr id="row2"></tr>
+            <tr id="row3"></tr>
+            <tr id="row4"></tr>
+            <tr id="row5"></tr>
+        </table>
+
+        <div class="keys">
+            <div class="keysRow0">
+                <button class="letters" id="q">q</button>
+                <button class="letters" id="w">w</button>
+                <button class="letters" id="e">e</button>
+                <button class="letters" id="r">r</button>
+                <button class="letters" id="t">t</button>
+                <button class="letters" id="z">z</button>
+                <button class="letters" id="u">u</button>
+                <button class="letters" id="i">i</button>
+                <button class="letters" id="o">o</button>
+                <button class="letters" id="p">p</button>
+            </div>
+            <div class="keysRow1"></div>
+                <button class="letters" id="a">a</button>
+                <button class="letters" id="s">s</button>
+                <button class="letters" id="d">d</button>
+                <button class="letters" id="f">f</button>
+                <button class="letters" id="g">g</button>
+                <button class="letters" id="h">h</button>
+                <button class="letters" id="j">j</button>
+                <button class="letters" id="k">k</button>
+                <button class="letters" id="l">l</button>
+                <button id="del">Del</button>
+            <div class="keysRow2">
+                <button class="letters" id="y">y</button>
+                <button class="letters" id="x">x</button>
+                <button class="letters" id="c">c</button>
+                <button class="letters" id="v">v</button>
+                <button class="letters" id="b">b</button>
+                <button class="letters" id="n">n</button>
+                <button class="letters" id="m">m</button>
+                <button id="enter">Enter</button>
+            </div>
+        </div>
+    </body>
 </html>
