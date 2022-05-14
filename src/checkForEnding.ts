@@ -1,4 +1,4 @@
-import { rowCount, colCount } from "./cellCount";
+import { rowCount, colCount } from "./userInput";
 import { getCell } from "./cellGeneration";
 import { currentWordArray, correctWordArray, correctWord } from "./words";
 

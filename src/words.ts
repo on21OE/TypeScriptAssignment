@@ -1,4 +1,4 @@
-import { rowCount } from "./cellCount";
+import { rowCount } from "./userInput";
 import { getCell } from "./cellGeneration";
 import { restartGame } from "./index";
 

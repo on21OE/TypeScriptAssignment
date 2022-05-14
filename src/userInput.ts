@@ -12,19 +12,18 @@ export function resetCounts() {
   rowCount = 0;
 }
 
-function deleteCurrentCells() {
-  for (const currentCell of document.getElementsByClassName("currentCell")) {
-    currentCell.classList.remove("currentCell");
-  }
+enter.onclick = () => {
+  handleEnter();
 }
 
-function checkIfRowIsFilled() {
-  for (let i = 0; i < correctWordLength; i++) {
-    if (getCell(rowCount, i)!.innerHTML === "") {
-      return false;
-    }
+del.onclick = () => {
+  handleDelete();
+}
+
+for (let letter of letters) {
+  letter.onclick = () => {
+    handleLetterInput(letter.innerHTML);
   }
-  return true;
 }
 
 document.addEventListener("keydown", (event) => {
@@ -72,15 +71,18 @@ function handleEnter() {
 }
 
 function handleDelete() {
-  if (getCell(rowCount, colCount)!.innerHTML === "" && colCount !== 0) {
-    getCell(rowCount, (colCount - 1))!.innerHTML = "";
-    getCell(rowCount, (colCount - 1))!.classList.remove("letterShrink");
-  } else {
-    getCell(rowCount, colCount)!.innerHTML = "";
-    getCell(rowCount, colCount)!.classList.remove("letterShrink");
-  }
+  getCell(rowCount, colCount)!.innerHTML = "";
+  getCell(rowCount, colCount)!.classList.remove("letterShrink");
   colCount = colCount > 0 ? colCount - 1: colCount;
   markCurrentCell(true);
+  document.getElementById("warning")!.style.display = "none";
+}
+
+function handleLetterInput(letter: string) {
+  getCell(rowCount, colCount)!.innerHTML = letter;
+  getCell(rowCount, colCount)!.classList.add("letterShrink");
+  colCount = colCount < (correctWordLength - 1) ? colCount + 1: colCount;
+  markCurrentCell(false);
   document.getElementById("warning")!.style.display = "none";
 }
 
@@ -92,26 +94,19 @@ function handleArrowKey(isArrowLeft: boolean) {
   }
 }
 
-function handleLetterInput(letter: string) {
-  getCell(rowCount, colCount)!.innerHTML = letter;
-  getCell(rowCount, colCount)!.classList.add("letterShrink");
-  colCount = colCount < (correctWordLength - 1) ? colCount + 1: colCount;
-  markCurrentCell(false);
-  document.getElementById("warning")!.style.display = "none";
-}
-
-enter.onclick = function() {
-  handleEnter();
-}
-
-del.onclick = function() {
-  handleDelete();
-}
-
-for (let letter of letters) {
-  letter.onclick = function() {
-    handleLetterInput(letter.innerHTML);
+function deleteCurrentCells() {
+  for (const currentCell of document.getElementsByClassName("currentCell")) {
+    currentCell.classList.remove("currentCell");
   }
+}
+
+function checkIfRowIsFilled() {
+  for (let i = 0; i < correctWordLength; i++) {
+    if (getCell(rowCount, i)!.innerHTML === "") {
+      return false;
+    }
+  }
+  return true;
 }
 
 export function clickInCell() {

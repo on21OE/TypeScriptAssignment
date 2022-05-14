@@ -1,12 +1,10 @@
 import { restartButtons } from "./buttons";
-import { clickInCell, resetCounts } from "./cellCount";
+import { clickInCell, resetCounts } from "./userInput";
 import { deleteCells, generateCells, markCurrentCell } from "./cellGeneration";
 import { letters } from "./inputs";
 import { getCorrectWord, resetCurrentWordArray } from "./words";
 
 export const cells = document.getElementsByClassName("cell") as HTMLCollectionOf<HTMLTableCellElement>;
-
-
 
 for (const restartButton of restartButtons) {
     restartButton.addEventListener("click", restartGame);
@@ -38,6 +36,3 @@ export function restartGame() {
     document.getElementById("winningScreen")!.classList.remove("show");
     document.getElementById("losingScreen")!.classList.remove("show");
 ;}
-
-
-

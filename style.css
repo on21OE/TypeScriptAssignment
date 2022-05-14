@@ -130,6 +130,8 @@ h1 {
     color: white;
     height: 30vh;
     display: none;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .difficulty {
@@ -338,7 +340,7 @@ tr {
     justify-content: center;
     align-items: center;
     background-color: #795464;
-    width: 12vw;
+    width: 250px;
     height: 40px;
     margin: 30px auto 0px;
     border-radius: 8px;

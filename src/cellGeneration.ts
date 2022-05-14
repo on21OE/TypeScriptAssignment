@@ -1,6 +1,8 @@
-import { rowCount, colCount } from "./cellCount";
+import { rowCount, colCount } from "./userInput";
 import { cells } from "./index";
 import { correctWordLength } from "./words";
+
+const rows = document.getElementsByClassName("row") as HTMLCollectionOf<HTMLTableRowElement>;
 
 export function getCell(pRowCount: number, pColCount: number) {
     return document.getElementById("cell" + pRowCount.toString() + pColCount);
@@ -17,12 +19,12 @@ export function markCurrentCell(isLetterDeleted: boolean) {
 }
 
 export function generateCells() {
-    for (let i = 0; i < 6; i++) {
+    for (const row of rows) {
         for (let  j = 0; j < correctWordLength; j++) {
             let newCell = document.createElement("td");
-            newCell.setAttribute("id", "cell" + i + j);
+            newCell.setAttribute("id", "cell" + row.id.slice(3) + j);
             newCell.setAttribute("class", "cell");
-            document.getElementById("row" + i)?.appendChild(newCell);
+            document.getElementById("row" + row.id.slice(3))?.appendChild(newCell);
         }
     }   
 }
