@@ -3,7 +3,7 @@ import { getCell } from "./cellGeneration";
 import { restartGame } from "./index";
 
 const easyWordList: string[] =["baum", "bein", "maus", "fein", "frau", "senf", "igel", "hund", "dose"]
-const normalWordList: string[] = ["kreuz", /*"feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze" */]
+const normalWordList: string[] = ["kreuz", "feder","mauer", "torte", "wurst", "pappe", "haare", "vater", "regen", "insel", "fisch", "asche", "knopf", "adler", "kelle", "welle", "fluss", "busch", "katze"]
 const hardWordList: string[] = ["banane", "klappe", "jaguar", "becher", "keller", "kuppel", "frisur", "schatz", "mutter"]
 
 export let correctWordLength = 5;

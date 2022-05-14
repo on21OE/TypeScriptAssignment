@@ -1,6 +1,5 @@
 import { countWinStreak } from "./checkForEnding";
 import { toggleNavBarElements } from "./handlePopUps";
-import { restartGame} from "./index";
 import { changeDifficulty } from "./words";
 
 export const restartButtons = document.getElementsByClassName("restart") as HTMLCollectionOf<HTMLButtonElement>;
